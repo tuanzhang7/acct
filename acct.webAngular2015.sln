@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DD2FD6F8-A8B9-4E47-AD33-448C1055E341}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C41F4C03-8C1D-4494-AFD1-2F61D1314E5B}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "acct.webAngular2015", "src\acct.webAngular2015\acct.webAngular2015.xproj", "{815E59CF-1ABD-4377-B0B7-1D909AD5FB37}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{815E59CF-1ABD-4377-B0B7-1D909AD5FB37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{815E59CF-1ABD-4377-B0B7-1D909AD5FB37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{815E59CF-1ABD-4377-B0B7-1D909AD5FB37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{815E59CF-1ABD-4377-B0B7-1D909AD5FB37}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{815E59CF-1ABD-4377-B0B7-1D909AD5FB37} = {DD2FD6F8-A8B9-4E47-AD33-448C1055E341}
+	EndGlobalSection
+EndGlobal
