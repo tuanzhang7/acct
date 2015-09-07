@@ -17,10 +17,17 @@ namespace acct.webAngular2015
 
         public void Configure(IApplicationBuilder app)
         {
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
+            //app.UseDefaultFiles();
+            app.UseStaticFiles();
+            app.UseDefaultFiles(
+                new Microsoft.AspNet.StaticFiles.DefaultFilesOptions()
+                { DefaultFileNames = new[] { "index.html" } }
+                );
+
+            //app.Run(async (context) =>
+            //{
+            //    await context.Response.WriteAsync("Hello World!");
+            //});
         }
     }
 }
