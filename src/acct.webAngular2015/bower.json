@@ -2,8 +2,6 @@
   "name": "ASP.NET",
   "private": true,
   "dependencies": {
-    "angular": "1.4.5",
-    "angular-route": "1.4.5",
-    "angular-resource": "1.4.5"
+    "amcharts3": "3.17.0"
   }
 }

@@ -1,17 +1,27 @@
 ﻿(function () {
     'use strict';
 
-    angular
-        .module('acctApp')
-        .controller('customerController', customerController);
+    var myApp = angular.module('acctApp');
 
-    customerController.$inject = ['$scope', 'customerService'];
+    myApp.controller('CustomerController', CustomerController);
 
-    function customerController($scope, customerService) {
-        $scope.title = 'customerController';
-        $scope.customers = customerService.query();
-        activate();
+    CustomerController.$inject = ['$scope', 'customerSrv'];
 
-        function activate() { }
+    function CustomerController($scope, customerSrv) {
+        $scope.customers = customerSrv.query({ start: 0, limit: 10 });
     }
+
+
+    myApp.controller('CustomerDetailController', CustomerDetailController);
+
+    CustomerDetailController.$inject = ['$scope',  'customerService'];
+
+    function CustomerDetailController($scope,$location, customerService) {
+        $scope.customer = customerService.detail({ id: 4 });
+    }
+
 })();
+
+
+
+

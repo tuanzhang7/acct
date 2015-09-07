@@ -12,7 +12,10 @@ module.exports = function (grunt) {
     grunt.initConfig({
         uglify: {
             my_target: {
-                files: { 'wwwroot/app.js': ['Scripts/app.js', 'Scripts/**/*.js'] }
+                files: { 'wwwroot/app.js': ['Scripts/app.js', 'Scripts/controllers/*.js', 'Scripts/services/*.js'] }
+            },
+            target: {
+                files: { 'wwwroot/combine.js': ['Scripts/thirdParty/*.js'] }
             }
         },
         cssmin: {
