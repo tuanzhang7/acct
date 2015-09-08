@@ -1,7 +1,8 @@
-﻿<div id="bodyContainer" >
-    <div ng-controller="customerDetailController">
+﻿<div id="bodyContainer">
+    <div>
         <div class="navbar navbar-inner block-header">
-            @*Balance: @ViewBag.balance*@
+            {{customer.Name}}
+            Balance:
             <div class="pull-right">
                 <a class="btn btn-primary" ng-href='/Invoice/Create/{{customer.Id}}' role="button"><i class="fa fa-plus"></i> New Invoice</a>
                 <a class="btn btn-primary" ng-href='/Quotation/Create/{{customer.Id}}' role="button"><i class="fa fa-plus"></i> New Quotation</a>
@@ -17,7 +18,43 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div id="transactiondiv">
-                            @*@Html.Partial("~/Views/Invoice/_List.cshtml", (PagedList.PagedList<acct.common.POCO.Invoice>)ViewBag.RecentInvoice)*@
+                            <table class="table table-hover margin-top15">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Order Number
+                                        </th>
+                                        <th>
+                                            Order Date
+                                        </th>
+
+                                        <th>
+                                            Total Amount
+                                        </th>
+                                        <th>
+                                            Status
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+
+                                <tr ng-repeat="invoice in transactions">
+                                    <td>
+                                        <a ng-href='/invocie/{{invoice.Id}}' ng-bind="invoice.OrderNumber"></a>
+                                    </td>
+
+                                    <td>
+                                        {{invoice.OrderDate}}
+                                    </td>
+                                    <td>
+                                        {{invoice.TotalWithTax}}
+                                    </td>
+                                    <td>
+                                        {{invoice.Status}}
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>

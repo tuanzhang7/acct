@@ -7,10 +7,15 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-copy');
 
     // configure plugins
     grunt.initConfig({
+        
         uglify: {
+            options: {
+                mangle: false
+            },
             my_target: {
                 files: { 'wwwroot/app.js': ['Scripts/app.js', 'Scripts/controllers/*.js', 'Scripts/services/*.js'] }
             },
@@ -18,6 +23,7 @@ module.exports = function (grunt) {
                 files: { 'wwwroot/combine.js': ['Scripts/thirdParty/*.js'] }
             }
         },
+        
         cssmin: {
             options: {
                 shorthandCompacting: false,
@@ -42,5 +48,5 @@ module.exports = function (grunt) {
     });
 
     // define tasks
-    grunt.registerTask('default', ['uglify','cssmin', 'watch']);
+    grunt.registerTask('default', ['uglify', 'cssmin', 'watch']);
 };

@@ -1,24 +1,37 @@
 ﻿(function () {
     'use strict';
 
-    var myApp = angular.module('acctApp');
+    angular.module('acctApp')
+        .controller('CustomerController', ['$scope', 'customerSrv',
+            function ($scope, customerSrv) {
 
-    myApp.controller('CustomerController', CustomerController);
+                //$scope.customers = customerSrv.query({ start: 0, limit: 10 });
+                $scope.customers = null;
+                customerSrv.query({ start: 0, limit: 10 }).then(function (data) {
+                    $scope.customers = data;
+                });
+                $scope.page.setTitle('Customers');
+            }])
+        .controller('CustomerDetailController', ['$scope', '$routeParams', '$location', 
+            'customerSrv', 'invoiceSvc',
+                function ($scope, $routeParams, $location,customerSrv, invoiceSvc) {
 
-    CustomerController.$inject = ['$scope', 'customerSrv'];
-
-    function CustomerController($scope, customerSrv) {
-        $scope.customers = customerSrv.query({ start: 0, limit: 10 });
-    }
+                    $scope.customer = customerSrv.detail({ id: $routeParams.id });
+                    $scope.transactions = invoiceSvc.query({ id: $routeParams.id });
 
 
-    myApp.controller('CustomerDetailController', CustomerDetailController);
+                    customerSrv.detail({ id: $routeParams.id }).then(function (data) {
+                        console.log($scope.data.Name)
+                        $scope.page.setTitle($scope.data.Name);
+                    });
 
-    CustomerDetailController.$inject = ['$scope',  'customerService'];
+                    
 
-    function CustomerDetailController($scope,$location, customerService) {
-        $scope.customer = customerService.detail({ id: 4 });
-    }
+                    angular.element(document).ready(function () {
+                        $('#myTab a:first').tab('show');
+                    });
+
+                }]);
 
 })();
 

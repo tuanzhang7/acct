@@ -5,8 +5,20 @@
 
     angular.module('acctApp', [
         'ngRoute',
-        'customerServices'
-    ]).config(config);
+        'customerServices',
+        'invoiceServices'
+    ])
+        .config(config)
+    .run(['$rootScope', function ($rootScope) {
+        $rootScope.page = {
+            setTitle: function (title) {
+                this.title = title;
+            }
+        }
+        $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
+            $rootScope.page.setTitle(current.$$route.title || 'Default Title');
+        });
+    }]);;
 
 
     function config($routeProvider, $locationProvider) {
@@ -25,4 +37,6 @@
 
         $locationProvider.html5Mode(true);
     }
+
+    
 })();
