@@ -2,11 +2,12 @@
     'use strict';
 
     var customerServiceModule = angular.module('customerServices', ['ngResource']);
-    var baseUrl = 'http://localhost:63267/api';
+    
 
 
-    customerServiceModule.factory("customerSrv", function ($resource) {
-        
+    customerServiceModule.factory("customerSrv", function ($resource, settings) {
+        var baseUrl = settings.baseUrl;
+        //console.log("factory" + baseUrl);
         return {
             list: $resource(baseUrl + '/Customer?start=:start&limit=:limit', {}, {
                 query: { method: 'GET', params: { start: '@start', limit: '@limit' }, isArray: true, headers: { 'auth-token': 'admin 1qazxsw@' } }

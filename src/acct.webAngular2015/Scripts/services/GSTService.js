@@ -2,9 +2,9 @@
     'use strict';
 
     var GSTServiceModule = angular.module('GSTServices', ['ngResource']);
-    var baseUrl = 'http://localhost:63267/api';
 
-    GSTServiceModule.factory("GSTSrv", function ($resource) {
+    GSTServiceModule.factory("GSTSrv", function ($resource, settings) {
+        var baseUrl = settings.baseUrl;
         return {
             list: $resource(baseUrl + '/GST', {}, {
                 query: { method: 'GET', params: {}, isArray: true, headers: { } }

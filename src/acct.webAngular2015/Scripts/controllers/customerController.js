@@ -32,15 +32,15 @@
 
                 }])
         .controller('CustomerEditController', ['$scope', '$routeParams', '$location',
-            'customerSrv',
-                function ($scope, $routeParams, $location, customerSrv) {
+            'customerSrv','GSTSrv',
+                function ($scope, $routeParams, $location, customerSrv, GSTSrv) {
 
                     $scope.customer = null;
                     customerSrv.detail.query({ id: $routeParams.id }).$promise.then(function (data) {
                         $scope.customer = data;
                         $scope.page.setTitle($scope.customer.Name);
                     });
-
+                    $scope.GSTList = GSTSrv.list.query();
                     $scope.edit = function () {
                       //  $http({
                       //      method: 'POST',
