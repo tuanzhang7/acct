@@ -1,7 +1,7 @@
 ﻿<div id="bodyContainer">
     <div>
         <div class="navbar navbar-inner block-header">
-            Balance:
+            Balance: {{ balance.balance | currency}}
             <div class="pull-right">
                 <a class="btn btn-primary" ng-href='/Invoice/Create/{{customer.Id}}' role="button"><i class="fa fa-plus"></i> New Invoice</a>
                 <a class="btn btn-primary" ng-href='/Quotation/Create/{{customer.Id}}' role="button"><i class="fa fa-plus"></i> New Quotation</a>
@@ -26,12 +26,17 @@
                                         <th>
                                             Order Date
                                         </th>
-
                                         <th>
+                                            Remark
+                                        </th>
+                                        <th class="text-right">
                                             Total Amount
                                         </th>
+                                        <th class="text-right">
+                                            Outstanding Amount
+                                        </th>
                                         <th>
-                                            Status
+
                                         </th>
                                         <th></th>
                                     </tr>
@@ -43,15 +48,47 @@
                                     </td>
 
                                     <td>
-                                        {{invoice.OrderDate}}
+                                        {{invoice.OrderDate |date:'dd/MM/yyyy'}}
                                     </td>
                                     <td>
-                                        {{invoice.TotalWithTax}}
+                                        {{invoice.Remark}}
+                                    </td>
+                                    <td class="text-right">
+                                        {{invoice.TotalWithTax | currency}}
+                                    </td>
+                                    <td class="text-right">
+                                        {{invoice.AmountOutstanding | currency}}
                                     </td>
                                     <td>
-                                        {{invoice.Status}}
+                                        <div ng-switch on="invoice.Status">
+                                            <div ng-switch-when="1">
+                                                <span class="label label-default">Unpaid</span>
+                                            </div>
+                                            <div ng-switch-when="2">
+                                                <span class="label label-warning">Partial</span>
+                                            </div>
+                                            <div ng-switch-when="3">
+                                                <span class="label label-success">Paid</span>
+                                            </div>
+                                            <div ng-switch-when="4">
+                                                <span class="label label-danger">Overdue</span>
+                                            </div>
+                                            <div ng-switch-default>
+                                                <span class="label label-default"></span>
+                                            </div>
+                                        </div>
+
                                     </td>
-                                    <td></td>
+                                    <td>
+                                        <!--@if (item.Status != (int)acct.common.POCO.Order.StatusOptions.Paid)
+                                        {-->
+                                        <a ng-href='/invocie/edit/{{invoice.Id}}' title="Edit" ng-show='invoice.Status!=3'><i class="glyphicon glyphicon-pencil"></i></a>
+                                        <!--}-->
+                                        <div class="pull-right">
+                                            <a ng-href='/invocie/print/{{invoice.Id}}' title="Print"><i class="fa fa-print"></i></a>
+                                        </div>
+
+                                    </td>
                                 </tr>
                             </table>
                         </div>
@@ -116,7 +153,7 @@
                             </div>
                         </div>
                         <div class="action-links">
-                            <a class="button" ng-href='/Customer/Edit/{{customer.Id}}' title="Edit">Edit</a>
+                            <a class="button" ng-href='/customer/edit/{{customer.Id}}'>Edit</a>
                         </div>
                     </div>
                 </div>
