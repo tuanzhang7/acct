@@ -2,6 +2,7 @@
   "name": "ASP.NET",
   "private": true,
   "dependencies": {
-    "amcharts3": "3.17.0"
+    "amcharts3": "3.17.0",
+    "angular-bootstrap": "*"
   }
 }

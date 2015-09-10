@@ -66,8 +66,8 @@
                     <label for="repeatSelect"> GST </label>
                 </div>
                 <div class="display-field">
-                    <select name="idmas_GST" ng-model="customer.idmas_GST">
-                        <option ng-repeat="option in GSTList" value="{{option.id}}">{{option.name}}</option>
+                    <select ng-options="option.Id as option.Code for option in GSTList"
+                            ng-model="customer.idmas_GST">
                     </select>
                 </div>
             </div>

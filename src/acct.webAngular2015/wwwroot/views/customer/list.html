@@ -42,5 +42,10 @@
             </tr>
 
         </table>
+        <pagination boundary-links="true" total-items="TotalCustomers" 
+                    items-per-page="PageSize" ng-change="pageChanged()" 
+                    ng-model="CurrentPageNumber" class="pagination-lg" 
+                    previous-text="Prev" next-text="Next" first-text="First" last-text="Last"></pagination>
+
     </div>
 </div>

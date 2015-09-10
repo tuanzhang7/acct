@@ -5,11 +5,19 @@
         .controller('CustomerController', ['$scope', 'customerSrv', 'settings',
             function ($scope, customerSrv, settings) {
                 console.log(settings.baseUrl);
+                var pageSize=settings.pageSize;
+                //$scope.PageSize = pageSize;
+                //$scope.CurrentPageNumber = 1;
+                
                 //$scope.customers = customerSrv.query({ start: 0, limit: 10 });
                 $scope.customers = null;
-                customerSrv.list.query({ start: 0, limit: 10 }).$promise.then(function (data) {
+                customerSrv.list.query({ start: 0, limit: pageSize }).$promise.then(function (data) {
                     $scope.customers = data;
                     $scope.page.setTitle('Customers');
+
+                    //$scope.TotalCustomers = response.TotalRows;
+                    //$scope.TotalPages = response.TotalPages;
+
                 });
 
             }])

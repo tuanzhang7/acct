@@ -12,7 +12,8 @@
         'GSTServices'
     ])
     .constant('settings', {
-        baseUrl: 'http://localhost:63267/api'
+        baseUrl: 'http://localhost:63267/api',
+        pageSize:20
     })
     .config(config)
     .run(['$rootScope', function ($rootScope) {
@@ -41,6 +42,18 @@
             .when('/customer/edit/:id', {
                 templateUrl: '/views/customer/edit.html',
                 controller: 'CustomerEditController'
+            })
+            .when('/GST', {
+                templateUrl: '/views/gst/list.html',
+                controller: 'GSTController'
+            })
+            .when('/GST/:id', {
+                templateUrl: '/views/gst/detail.html',
+                controller: 'GSTDetailController'
+            })
+            .when('/GST/edit/:id', {
+                templateUrl: '/views/gst/edit.html',
+                controller: 'GSTEditController'
             })
             .otherwise({
                 redirectTo: '/customer'
