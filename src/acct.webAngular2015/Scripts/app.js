@@ -7,6 +7,7 @@
 
     angular.module('acctApp', [
         'ngRoute',
+        'ui.bootstrap',
         'customerServices',
         'invoiceServices',
         'GSTServices'

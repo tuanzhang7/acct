@@ -8,12 +8,8 @@
             </div>
         </div>
 
-        <ul class="nav nav-tabs" role="tablist" id="myTab">
-            <li role="presentation"><a href="#sales" role="tab" data-toggle="tab">Transactions</a></li>
-            <li role="presentation"><a href="#customer" role="tab" data-toggle="tab">Customer Info</a></li>
-        </ul>
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="sales">
+        <tabset>
+            <tab heading="Transactions">
                 <div class="row">
                     <div class="col-md-12">
                         <div id="transactiondiv">
@@ -81,7 +77,7 @@
                                     </td>
                                     <td>
                                         <!--@if (item.Status != (int)acct.common.POCO.Order.StatusOptions.Paid)
-                                        {-->
+                            {-->
                                         <a ng-href='/invocie/edit/{{invoice.Id}}' title="Edit" ng-show='invoice.Status!=3'><i class="glyphicon glyphicon-pencil"></i></a>
                                         <!--}-->
                                         <div class="pull-right">
@@ -94,9 +90,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div role="tabpanel" class="tab-pane" id="customer">
+            </tab>
+            <tab heading="Customer Details">
                 <div class="row margin-top30">
                     <div class="col-md-12">
                         <div class="detailview">
@@ -157,7 +152,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </tab>
+        </tabset>
+
+        
     </div>
 </div>

@@ -7,10 +7,9 @@
 
     customerServiceModule.factory("customerSrv", function ($resource, settings) {
         var baseUrl = settings.baseUrl;
-        //console.log("factory" + baseUrl);
         return {
-            list: $resource(baseUrl + '/Customer?start=:start&limit=:limit', {}, {
-                query: { method: 'GET', params: { start: '@start', limit: '@limit' }, isArray: true, headers: { 'auth-token': 'admin 1qazxsw@' } }
+            list: $resource(baseUrl + '/Customer?page=:page&pagesize=:pagesize', {}, {
+                query: { method: 'GET', params: { page: '@page', pagesize: '@pagesize' }, isArray: true, headers: { 'auth-token': 'admin 1qazxsw@' } }
             }),
             detail: $resource(baseUrl + '/Customer/:id', {}, {
                 query: { method: 'GET', params: { id: '@id' } },

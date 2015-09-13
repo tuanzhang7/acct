@@ -2,23 +2,50 @@
     'use strict';
 
     angular.module('acctApp')
-        .controller('CustomerController', ['$scope', 'customerSrv', 'settings',
-            function ($scope, customerSrv, settings) {
-                console.log(settings.baseUrl);
-                var pageSize=settings.pageSize;
-                //$scope.PageSize = pageSize;
-                //$scope.CurrentPageNumber = 1;
+        .controller('CustomerController', ['$scope', '$http', 'customerSrv', 'settings',
+            function ($scope, $http, customerSrv, settings) {
+
+                var pageSize = 3;//settings.pageSize;
+                $scope.pageSize = pageSize;
+
+                $scope.currentPage = 1;
+                $scope.maxSize = 10;
+                $scope.page.setTitle('Customers');
+
+                get($scope.currentPage, pageSize);
+                function get(currentPage, pageSize) {
+                    //$http({ method: 'GET', url: 'http://localhost:63267/api/Customer', params: { page: $scope.currentPage, pagesize: pageSize } }
+                    //    ).then(function (response) {
+
+                    //        var Pagination = angular.fromJson(response.headers('X-Pagination'));
+                    //        var TotalCount = Pagination.TotalCount;
+                    //        var TotalPages = Pagination.TotalPages;
+
+                    //        //console.log(response.headers('X-Pagination'));
+                    //        //console.log(Pagination);
+
+                    //        $scope.totalItems = TotalCount;
+                    //        $scope.totalPages = TotalPages;
+                    //        $scope.customers = response.data;
+                    //    }, function (response) {
+                    //        $scope.data = response.data || "Request failed";
+                    //        $scope.status = response.status;
+                    //    });
+                    customerSrv.list.query({ page: currentPage, pagesize: pageSize }, function (data, headers) {
+                        $scope.customers = data;
+                        var Pagination = angular.fromJson(headers('X-Pagination'));
+                        var TotalCount = Pagination.TotalCount;
+                        var TotalPages = Pagination.TotalPages;
+
+                        $scope.totalItems = TotalCount;
+                        $scope.totalPages = TotalPages;
+                    });
+                }
                 
-                //$scope.customers = customerSrv.query({ start: 0, limit: 10 });
-                $scope.customers = null;
-                customerSrv.list.query({ start: 0, limit: pageSize }).$promise.then(function (data) {
-                    $scope.customers = data;
-                    $scope.page.setTitle('Customers');
-
-                    //$scope.TotalCustomers = response.TotalRows;
-                    //$scope.TotalPages = response.TotalPages;
-
-                });
+                $scope.pageChanged = function () {
+                    get($scope.currentPage, pageSize);
+                    console.log('Page changed to: ' + $scope.currentPage);
+                };
 
             }])
         .controller('CustomerDetailController', ['$scope', '$routeParams', '$location',
@@ -34,13 +61,10 @@
                         $scope.page.setTitle($scope.customer.Name);
                     });
 
-                    angular.element(document).ready(function () {
-                        $('#myTab a:first').tab('show');
-                    });
 
                 }])
         .controller('CustomerEditController', ['$scope', '$routeParams', '$location',
-            'customerSrv','GSTSrv',
+            'customerSrv', 'GSTSrv',
                 function ($scope, $routeParams, $location, customerSrv, GSTSrv) {
 
                     $scope.customer = null;
@@ -50,24 +74,24 @@
                     });
                     $scope.GSTList = GSTSrv.list.query();
                     $scope.edit = function () {
-                      //  $http({
-                      //      method: 'POST',
-                      //      url: 'process.php',
-                      //      data: $.param($scope.formData),  // pass in data as strings
-                      //      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
-                      //  })
-                      //.success(function (data) {
-                      //    console.log(data);
+                        //  $http({
+                        //      method: 'POST',
+                        //      url: 'process.php',
+                        //      data: $.param($scope.formData),  // pass in data as strings
+                        //      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+                        //  })
+                        //.success(function (data) {
+                        //    console.log(data);
 
-                      //    if (!data.success) {
-                      //         if not successful, bind errors to error variables
-                      //        $scope.errorName = data.errors.name;
-                      //        $scope.errorSuperhero = data.errors.superheroAlias;
-                      //    } else {
-                      //         if successful, bind success message to message
-                      //        $scope.message = data.message;
-                      //    }
-                      //});
+                        //    if (!data.success) {
+                        //         if not successful, bind errors to error variables
+                        //        $scope.errorName = data.errors.name;
+                        //        $scope.errorSuperhero = data.errors.superheroAlias;
+                        //    } else {
+                        //         if successful, bind success message to message
+                        //        $scope.message = data.message;
+                        //    }
+                        //});
 
                         $scope.customer.$save(
                             // success

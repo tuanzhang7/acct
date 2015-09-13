@@ -42,10 +42,17 @@
             </tr>
 
         </table>
-        <pagination boundary-links="true" total-items="TotalCustomers" 
-                    items-per-page="PageSize" ng-change="pageChanged()" 
-                    ng-model="CurrentPageNumber" class="pagination-lg" 
-                    previous-text="Prev" next-text="Next" first-text="First" last-text="Last"></pagination>
+        <!--<pagination boundary-links="true" total-items="TotalCustomers" 
+                    items-per-page="PageSize"  
+                    ng-model="CurrentPageNumber" class="pagination-sm" 
+                    previous-text="Prev" next-text="Next" first-text="First" last-text="Last"></pagination>-->
+        
+        <pagination total-items="totalItems"
+                    ng-model="currentPage"
+                    max-size="maxSize" class="pagination-md" boundary-links="true"
+                    rotate="false" num-pages="numPages" items-per-page="pageSize" ng-change="pageChanged()"></pagination>
 
+        <pre>Page: {{currentPage}} / {{numPages}} Total:{{totalItems}}</pre>
     </div>
 </div>
+        

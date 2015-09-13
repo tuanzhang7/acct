@@ -3,6 +3,8 @@
   "private": true,
   "dependencies": {
     "amcharts3": "3.17.0",
-    "angular-bootstrap": "*"
+    "angular-bootstrap": "*",
+    "bootstrap": "3.3.5"
+   
   }
 }
