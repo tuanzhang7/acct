@@ -1,0 +1,77 @@
+﻿
+        <div class="detailview">
+            <div class="row">
+                <div class="editor-label">
+                    Name
+                </div>
+                <div class="display-field">
+                    <input type="text" class="form-control" ng-model="customer.Name" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="editor-label">
+                    Address
+                </div>
+                <div class="display-field">
+                    <textarea class="form-control" rows="4" id="Address" ng-model="customer.Address" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="editor-label">
+                    Address
+                </div>
+                <div class="display-field">
+                    <textarea class="form-control" rows="4" ng-model="customer.Address" >
+                    </textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="editor-label">
+                    Phone
+                </div>
+                <div class="display-field">
+                    <input type="text" class="form-control" ng-model="customer.Phone" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="editor-label">
+                    Fax
+                </div>
+                <div class="display-field">
+                    <input type="text" class="form-control" ng-model="customer.Fax" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="editor-label">
+                    Email
+                </div>
+                <div class="display-field">
+                    <input type="email" class="form-control" ng-model="customer.Email" /><br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="editor-label">
+                    ContactName
+                </div>
+                <div class="display-field">
+                    <input type="text" class="form-control" ng-model="customer.ContactName" />
+                </div>
+            </div>
+
+        </div>
+        <div class="detailview">
+            <div class="row">
+                <div class="editor-label">
+                    <label for="repeatSelect"> GST </label>
+                </div>
+                <div class="display-field">
+                    <select ng-options="option.Id as option.Code for option in GSTList"
+                            ng-model="customer.idmas_GST">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="action-links">
+            <input type="submit" class="button" value="Save" />
+            <a class="button" ng-href='/customer'>Back to List</a>
+        </div>

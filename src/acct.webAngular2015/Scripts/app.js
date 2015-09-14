@@ -14,7 +14,7 @@
     ])
     .constant('settings', {
         baseUrl: 'http://localhost:63267/api',
-        pageSize:20
+        pageSize:10
     })
     .config(config)
     .run(['$rootScope', function ($rootScope) {
@@ -32,9 +32,17 @@
 
     function config($routeProvider, $locationProvider) {
         $routeProvider
+            .when('/', {
+                templateUrl: '/views/home/index.html',
+                controller: 'HomeController'
+            })
             .when('/customer', {
                 templateUrl: '/views/customer/list.html',
                 controller: 'CustomerController'
+            })
+            .when('/customer/create', {
+                templateUrl: '/views/customer/create.html',
+                controller: 'CustomerCreateController'
             })
             .when('/customer/:id', {
                 templateUrl: '/views/customer/detail.html',
@@ -57,7 +65,7 @@
                 controller: 'GSTEditController'
             })
             .otherwise({
-                redirectTo: '/customer'
+                redirectTo: '/'
             });
 
         $locationProvider.html5Mode(true);

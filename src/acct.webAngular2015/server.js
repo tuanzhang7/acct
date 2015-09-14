@@ -11,7 +11,7 @@ app = express();
 app.use(express.static(__dirname + '/wwwroot'));
 
 app.use('/*', function (req, res) {
-    res.sendfile(__dirname + '/wwwroot/index.html');
+    res.sendFile(__dirname + '/wwwroot/index.html');
 });
 
 //PORT TO LISTEN TO

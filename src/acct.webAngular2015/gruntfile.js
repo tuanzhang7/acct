@@ -17,7 +17,7 @@ module.exports = function (grunt) {
                 mangle: false
             },
             my_target: {
-                files: { 'wwwroot/app.js': ['Scripts/app.js', 'Scripts/controllers/*.js', 'Scripts/services/*.js'] }
+                files: { 'wwwroot/app.js': ['Scripts/app.js', 'Scripts/**/*.js', '!Scripts/thirdParty/*.js'] }
             },
             target: {
                 files: { 'wwwroot/combine.js': ['Scripts/thirdParty/*.js'] }

@@ -5,7 +5,7 @@
         .controller('CustomerController', ['$scope', '$http', 'customerSrv', 'settings',
             function ($scope, $http, customerSrv, settings) {
 
-                var pageSize = 3;//settings.pageSize;
+                var pageSize = settings.pageSize;
                 $scope.pageSize = pageSize;
 
                 $scope.currentPage = 1;
@@ -41,10 +41,9 @@
                         $scope.totalPages = TotalPages;
                     });
                 }
-                
+
                 $scope.pageChanged = function () {
                     get($scope.currentPage, pageSize);
-                    console.log('Page changed to: ' + $scope.currentPage);
                 };
 
             }])
@@ -60,6 +59,26 @@
                         $scope.customer = data;
                         $scope.page.setTitle($scope.customer.Name);
                     });
+
+
+                }])
+        .controller('CustomerCreateController', ['$scope', '$routeParams', '$location',
+            'customerSrv', 'GSTSrv',
+                function ($scope, $routeParams, $location, customerSrv, GSTSrv) {
+                    $scope.page.setTitle('Create Customer');
+                    $scope.GSTList = GSTSrv.list.query();
+                    $scope.create = function () {
+                        $scope.customer.$save(
+                            // success
+                            function () {
+                                $location.path('/customer/' + $routeParams.id);
+                            },
+                            // error
+                            function (error) {
+                                //_showValidationErrors($scope, error);
+                            }
+                        );
+                    };
 
 
                 }])
@@ -96,7 +115,6 @@
                         $scope.customer.$save(
                             // success
                             function () {
-                                console.log("saving...");
                                 $location.path('/customer/' + $routeParams.id);
                             },
                             // error
