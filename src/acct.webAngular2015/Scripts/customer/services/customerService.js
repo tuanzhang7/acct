@@ -12,6 +12,7 @@
                 query: { method: 'GET', params: { page: '@page', pagesize: '@pagesize' }, isArray: true, headers: { 'auth-token': 'admin 1qazxsw@' } }
             }),
             detail: $resource(baseUrl + '/Customer/:id', {}, {
+                create:{ method: 'POST'},
                 query: { method: 'GET', params: { id: '@id' } },
                 update: { method: 'PUT', params: { id: '@id' } },
                 delete: { method: 'DELETE', params: { id: '@id' } }

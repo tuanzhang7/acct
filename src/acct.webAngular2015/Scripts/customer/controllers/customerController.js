@@ -66,21 +66,23 @@
             'customerSrv', 'GSTSrv',
                 function ($scope, $routeParams, $location, customerSrv, GSTSrv) {
                     $scope.page.setTitle('Create Customer');
-                    $scope.GSTList = GSTSrv.list.query();
+
+                    $scope.customer = null;
+
+                    $scope.GSTList = null;
+                    GSTSrv.list.query().$promise.then(function (data) {
+                        $scope.GSTList = data;
+                        $scope.customer = { idmas_GST: data[0].Id };
+                    });
+                    
                     $scope.create = function () {
-                        $scope.customer.$save(
-                            // success
-                            function () {
-                                $location.path('/customer/' + $routeParams.id);
-                            },
-                            // error
-                            function (error) {
-                                //_showValidationErrors($scope, error);
-                            }
-                        );
+                        console.log($scope.customer.Name);
+                        customerSrv.detail.create($scope.customer).$promise.then(function (data) {
+                            //console.log(data.Id);
+                            var newId = data.Id;
+                            $location.path('/customer/' + newId);
+                        });
                     };
-
-
                 }])
         .controller('CustomerEditController', ['$scope', '$routeParams', '$location',
             'customerSrv', 'GSTSrv',
