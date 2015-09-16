@@ -40,7 +40,7 @@
 
                                 <tr ng-repeat="invoice in transactions">
                                     <td>
-                                        <a ng-href='/invocie/{{invoice.Id}}' ng-bind="invoice.OrderNumber"></a>
+                                        <a ng-href='/invoice/{{invoice.Id}}' ng-bind="invoice.OrderNumber"></a>
                                     </td>
 
                                     <td>
@@ -56,24 +56,7 @@
                                         {{invoice.AmountOutstanding | currency}}
                                     </td>
                                     <td>
-                                        <div ng-switch on="invoice.Status">
-                                            <div ng-switch-when="1">
-                                                <span class="label label-default">Unpaid</span>
-                                            </div>
-                                            <div ng-switch-when="2">
-                                                <span class="label label-warning">Partial</span>
-                                            </div>
-                                            <div ng-switch-when="3">
-                                                <span class="label label-success">Paid</span>
-                                            </div>
-                                            <div ng-switch-when="4">
-                                                <span class="label label-danger">Overdue</span>
-                                            </div>
-                                            <div ng-switch-default>
-                                                <span class="label label-default"></span>
-                                            </div>
-                                        </div>
-
+                                        <div order-status status="invoice.Status"></div>
                                     </td>
                                     <td>
                                         <!--@if (item.Status != (int)acct.common.POCO.Order.StatusOptions.Paid)

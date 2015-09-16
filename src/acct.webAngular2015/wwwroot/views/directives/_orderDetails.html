@@ -1,0 +1,46 @@
+﻿<div class="row form-group">
+    <div class="display-label col-md-2">
+       Customer
+    </div>
+    <div class="display-field col-md-6">
+        <a ng-href='/customer/{{order.CustomerId}}' ng-bind="order.Customer.Name"></a>
+    </div>
+
+    <div class="display-label col-md-2">
+        Date
+    </div>
+    <div class="display-field col-md-2">
+        {{order.OrderDate |date:'dd/MM/yyyy'}}
+    </div>
+</div>
+<div class="row form-group">
+    <div class="display-label col-md-2">
+        Salesman 
+    </div>
+    <div class="display-field col-md-6">
+        {{order.Salesman.Name}}
+    </div>
+    <div class="display-label col-md-2">
+        GST
+    </div>
+    <div class="display-field col-md-2">
+        {{order.GSTRate}}%
+    </div>
+</div>
+<div class="row form-group">
+    <div class="display-label col-md-2">
+        Remark
+    </div>
+    <div class="display-field col-md-6">
+        {{order.Remark}}
+    </div>
+
+</div>
+
+<!--@Html.Partial("~/Views/Order/_ListDetail.cshtml", Model.OrderDetail)-->
+
+<div class="col-md-12 text-right">
+    <span class="text-right"><label for="TotalAmount">TotalAmount</label> <span>{{order.TotalWithTax | currency}}</span></span>
+</div>
+
+

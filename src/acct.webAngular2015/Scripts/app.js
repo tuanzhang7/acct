@@ -3,8 +3,6 @@
 
     config.$inject = ['$routeProvider', '$locationProvider'];
 
-    
-
     angular.module('acctApp', [
         'ngRoute',
         'ui.bootstrap',
@@ -28,8 +26,6 @@
         });
     }]);
 
-
-
     function config($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {
@@ -51,6 +47,10 @@
             .when('/customer/edit/:id', {
                 templateUrl: '/views/customer/edit.html',
                 controller: 'CustomerEditController'
+            })
+            .when('/invoice/:id', {
+                templateUrl: '/views/invoice/detail.html',
+                controller: 'InvoiceDetailController'
             })
             .when('/GST', {
                 templateUrl: '/views/gst/list.html',

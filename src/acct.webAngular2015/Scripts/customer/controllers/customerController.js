@@ -51,7 +51,7 @@
             'customerSrv', 'invoiceSvc',
                 function ($scope, $routeParams, $location, customerSrv, invoiceSvc) {
 
-                    $scope.transactions = invoiceSvc.query({ id: $routeParams.id });
+                    $scope.transactions = invoiceSvc.listByCustomer.query({ id: $routeParams.id });
                     $scope.balance = customerSrv.balance.query({ id: $routeParams.id });
 
                     $scope.customer = null;

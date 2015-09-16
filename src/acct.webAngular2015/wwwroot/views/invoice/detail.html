@@ -1,0 +1,22 @@
+﻿<div class="row">
+    <div class="col-lg-11">
+    </div>
+    <div class="col-lg-1 pull-right">
+        <h3><div order-status status="invoice.Status"></div></h3>
+    </div>
+</div>
+    
+    <div order-details order="invoice"></div>
+<div class="action-links">
+    <a class="button" ng-href='/invoice/edit/{{invoice.Id}}'>Edit</a>
+
+    <a ng-href='/invocie/print/{{invoice.Id}}' title="Print"><i class="fa fa-print"></i> Print</a>
+
+    <a ng-href='/invocie/printDO/{{invoice.Id}}' title="Print"><i class="fa fa-print"></i> Print DO</a>
+
+</div>
+<div id="div_payments" class="detailview">
+    <!--@Html.Partial("~/Views/Payment/_ListItem.cshtml", Model.PaymentDetails)-->
+</div>
+
+

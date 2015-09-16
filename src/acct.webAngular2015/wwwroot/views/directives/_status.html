@@ -1,0 +1,17 @@
+﻿<div ng-switch on="status">
+    <div ng-switch-when="1">
+        <span class="label label-default">Unpaid</span>
+    </div>
+    <div ng-switch-when="2">
+        <span class="label label-warning">Partial</span>
+    </div>
+    <div ng-switch-when="3">
+        <span class="label label-success">Paid</span>
+    </div>
+    <div ng-switch-when="4">
+        <span class="label label-danger">Overdue</span>
+    </div>
+    <div ng-switch-default>
+        <span class="label label-default"></span>
+    </div>
+</div>
