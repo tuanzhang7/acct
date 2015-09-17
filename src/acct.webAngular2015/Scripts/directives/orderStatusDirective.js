@@ -1,6 +1,5 @@
 ﻿angular.module('acctApp')
 .directive('orderStatus', function () {
-    console.log('directive');
     return {
         //restrict: 'E',
         scope: {

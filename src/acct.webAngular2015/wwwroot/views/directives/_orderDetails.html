@@ -34,13 +34,12 @@
     <div class="display-field col-md-6">
         {{order.Remark}}
     </div>
-
 </div>
 
-<!--@Html.Partial("~/Views/Order/_ListDetail.cshtml", Model.OrderDetail)-->
+<div order-lines lines="order.OrderDetail"></div>
 
-<div class="col-md-12 text-right">
-    <span class="text-right"><label for="TotalAmount">TotalAmount</label> <span>{{order.TotalWithTax | currency}}</span></span>
+<div class="text-right">
+    <h3>Total: {{order.TotalWithTax | currency}}</h3>
 </div>
 
 

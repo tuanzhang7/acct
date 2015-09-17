@@ -1,0 +1,50 @@
+﻿<table class="table table-hover margin-top30">
+    <thead>
+        <tr>
+            <th>
+                Description
+            </th>
+            <th class="text-right">
+                Qty
+            </th>
+            <th class="text-right">
+                Unit Price
+            </th>
+            <th class="text-right">
+                Discount
+            </th>
+            <th class="text-right">
+                Line Total
+            </th>
+        </tr>
+    </thead>
+    <tr ng-repeat="line in lines" ng-cloak>
+        <td>
+            <input type="hidden" name='item_id_{{line.Id}}' value='{{line.Id}}'>
+            <span id='Description_{{line.Id}}'>
+                <!--@Html.FormatBody(item.Description)-->
+                {{line.Description}}
+            </span>
+        </td>
+        <td class="text-right">
+            <span id='Qty_{{line.Id}}'>
+                {{line.Qty}}
+            </span>
+        </td>
+        <td class="text-right">
+            <span id='UnitPrice_{{line.Id}}'>
+                {{line.UnitPrice}}
+            </span>
+        </td>
+        <td class="text-right">
+            <span id='Discount_{{line.Id}}'>
+                {{line.Discount}}
+            </span>
+        </td>
+        <td class="text-right">
+            <span id='Amount_{{line.Id}}'>
+                {{line.LineTotal | currency}}
+            </span>
+        </td>
+    </tr>
+</table>

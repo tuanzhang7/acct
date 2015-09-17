@@ -1,6 +1,5 @@
 ﻿angular.module('acctApp')
 .directive('orderDetails', function () {
-    console.log('directive');
     return {
         //restrict: 'E',
         scope: {
@@ -8,6 +7,17 @@
         },
         templateUrl: function (elem, attr) {
             return '/views/directives/_orderDetails.html';
+        }
+    };
+}).directive('orderLines', function () {
+    console.log('orderLines');
+    return {
+        //restrict: 'E',
+        scope: {
+            lines: '=lines'
+        },
+        templateUrl: function (elem, attr) {
+            return '/views/directives/_orderLines.html';
         }
     };
 });
