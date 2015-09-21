@@ -15,6 +15,11 @@
         pageSize:10
     })
     .config(config)
+    .config(['datepickerConfig','datepickerPopupConfig', function (datepickerConfig, datepickerPopupConfig) {
+        datepickerConfig.showWeeks = false;
+        datepickerPopupConfig.showButtonBar = false;
+        datepickerPopupConfig.datepickerPopup = 'dd/MM/yyyy';
+    }])
     .run(['$rootScope', function ($rootScope) {
         $rootScope.page = {
             setTitle: function (title) {
