@@ -19,6 +19,9 @@
             }),
             balance: $resource(baseUrl + '/customer/:id/balance', {}, {
                 query: { method: 'GET', params: { id: '@id' } }
+            }),
+            lookup: $resource(baseUrl + '/customer/lookup?q=:q&limit=:limit', {}, {
+                query: { method: 'GET', params: { q: '@q', limit: '@limit' } }
             })
         };
     });

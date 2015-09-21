@@ -1,4 +1,20 @@
-﻿<div class="navbar navbar-inner block-header margin-top30">
+﻿<div class="input-group">
+
+    <input type="text" ng-model="asyncSelected" 
+           placeholder="Search..." 
+           typeahead="address for address in lookup($viewValue)" 
+           typeahead-loading="loadingLocations" 
+           typeahead-no-results="noResults" 
+           class="form-control">
+    <div class="input-group-btn">
+        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+    </div>
+    <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+    <div ng-show="noResults">
+        <i class="glyphicon glyphicon-remove"></i> No Results Found
+    </div>
+</div>
+<div class="navbar navbar-inner block-header margin-top30">
     <div class="pull-right">
         <a class="btn btn-primary" ng-href='/customer/create' role="button"><i class="fa fa-plus"></i> New</a>
     </div>
