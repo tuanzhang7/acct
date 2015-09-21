@@ -1,0 +1,64 @@
+﻿<div class="form-horizontal">
+    <div class="form-group ">
+        <div class="editor-label col-md-2">
+            Order Number
+        </div>
+        <div class="editor-field col-md-4">
+            <input type="text" class="form-control" ng-model="order.OrderNumber" />
+           
+            <!--@Html.HiddenFor(model => model.OrderType)-->
+        </div>
+        <div class="col-md-1">
+        </div>
+        <div class="editor-label col-md-2">
+            Date
+        </div>
+        <div class="editor-field col-md-3">
+            <div order-details order="invoice"></div>
+        </div>
+    </div>
+
+    <div class="form-group ">
+        <div class="editor-label col-md-2">
+            Customer
+        </div>
+        <div class="editor-field col-md-4">
+            <div class="input-group">
+                @Html.DropDownList("CustomerId", (SelectList)ViewBag.CustomerIds, new { @class = "form-control" })
+                
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">+</button>
+                </span>
+
+            </div><!-- /input-group -->
+        </div>
+        <div class="col-md-1">
+        </div>
+        <div class="editor-label col-md-2">
+            GST
+        </div>
+        <div class="editor-field col-md-3">
+            <div class="input-group">
+                <input type="text" class="form-control" ng-model="order.GSTRate" />
+                <span class="input-group-addon">%</span>
+            </div><!-- /input-group -->
+        </div>
+    </div>
+    <div class="form-group ">
+        <div class="editor-label col-md-2">
+            Remark
+        </div>
+        <div class="editor-field col-md-4">
+            <textarea class="form-control" rows="4" id="Remark" ng-model="order.Remark" />
+        </div>
+        <div class="col-md-1">
+        </div>
+        <div class="editor-label col-md-2">
+
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+</div>
+
