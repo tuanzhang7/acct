@@ -2,8 +2,8 @@
     'use strict';
 
     angular.module('acctApp')
-        .controller('CustomerController', ['$scope', '$http', 'customerSrv', 'settings',
-            function ($scope, $http, customerSrv, settings) {
+        .controller('CustomerController', ['$scope', '$http','$location', 'customerSrv', 'settings',
+            function ($scope, $http, $location, customerSrv, settings) {
 
                 var pageSize = settings.pageSize;
                 $scope.pageSize = pageSize;
@@ -43,13 +43,24 @@
                 }
 
                 $scope.lookup = function (q) {
-
                     return customerSrv.lookup.query({ q: q, limit: 10 }).$promise.then(function (data) {
                         //console.log(data);
                         return data;
                     });
                 };
 
+                $scope.onSelect = function ($item, $model, $label) {
+                    $scope.$item = $item;
+                    $scope.$model = $model;
+                    $scope.$label = $label;
+
+                    //console.log("$item" + $item.id);
+                    //console.log("$model" + $model);
+                    //console.log("$label" + $label);
+
+                    var id = $item.id;
+                    $location.path('/customer/' + id);
+                };
 
                 $scope.pageChanged = function () {
                     get($scope.currentPage, pageSize);
