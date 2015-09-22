@@ -43,15 +43,11 @@
                 }
 
                 $scope.lookup = function (q) {
-                    console.log(q);
-                    //customerSrv.lookup.query({ q: q, limit: 5 }, function (data) {
-                    //    console.log(data.Id);
-                    //});
-                    //customerSrv.detail.create($scope.customer).$promise.then(function (data) {
-                    //    //console.log(data.Id);
-                    //    var newId = data.Id;
-                    //    $location.path('/customer/' + newId);
-                    //});
+
+                    return customerSrv.lookup.query({ q: q, limit: 10 }).$promise.then(function (data) {
+                        //console.log(data);
+                        return data;
+                    });
                 };
 
 
