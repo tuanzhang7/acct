@@ -1,0 +1,49 @@
+﻿<table class="table table-hover margin-top15">
+    <thead>
+        <tr>
+            <th>
+                Order Number
+            </th>
+            <th>
+                Order Date
+            </th>
+            <th>
+                Remark
+            </th>
+            <th class="text-right">
+                Total Amount
+            </th>
+            <th class="text-right">
+                Outstanding Amount
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tr ng-repeat="invoice in orders">
+        <td>
+            <a ng-href='/invoice/{{invoice.Id}}' ng-bind="invoice.OrderNumber"></a>
+        </td>
+        <td>
+            {{invoice.OrderDate |date:'dd/MM/yyyy'}}
+        </td>
+        <td>
+            {{invoice.Remark}}
+        </td>
+        <td class="text-right">
+            {{invoice.TotalWithTax | currency}}
+        </td>
+        <td class="text-right">
+            {{invoice.AmountOutstanding | currency}}
+        </td>
+        <td>
+            <div order-status status="invoice.Status"></div>
+        </td>
+        <td>
+            <a ng-href='/invoice/edit/{{invoice.Id}}' title="Edit" ng-show='invoice.Status!=3'><i class="glyphicon glyphicon-pencil"></i></a>
+            <div class="pull-right">
+                <a ng-href='/invoice/print/{{invoice.Id}}' title="Print"><i class="fa fa-print"></i></a>
+            </div>
+        </td>
+    </tr>
+</table>

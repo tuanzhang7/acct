@@ -2,6 +2,49 @@
     'use strict';
 
     angular.module('acctApp')
+        .controller('InvoiceController', ['$scope', '$http', '$location', 'customerSrv','invoiceSvc', 'settings',
+            function ($scope, $http, $location, customerSrv,invoiceSvc, settings) {
+
+                var pageSize = settings.pageSize;
+                $scope.pageSize = pageSize;
+                $scope.currentPage = 1;
+                $scope.maxSize = 10;
+                $scope.page.setTitle('Invoice');
+
+                get($scope.currentPage, pageSize);
+                function get(currentPage, pageSize) {
+                    invoiceSvc.list.query({ page: currentPage, pagesize: pageSize }, function (data, headers) {
+                        $scope.invoices = data;
+                        var Pagination = angular.fromJson(headers('X-Pagination'));
+                        var TotalCount = Pagination.TotalCount;
+                        var TotalPages = Pagination.TotalPages;
+
+                        $scope.totalItems = TotalCount;
+                        $scope.totalPages = TotalPages;
+                    });
+                }
+                $scope.pageChanged = function () {
+                    get($scope.currentPage, pageSize);
+                };
+
+                $scope.lookup = function (q) {
+                    return customerSrv.lookup.query({ q: q, limit: 10 }).$promise.then(function (data) {
+                        return data;
+                    });
+                };
+
+                $scope.onSelect = function ($item, $model, $label) {
+                    $scope.$item = $item;
+                    $scope.$model = $model;
+                    $scope.$label = $label;
+
+                    var id = $item.id;
+                    $location.path('/invoice/' + id);
+                };
+
+                
+
+            }])
         .controller('InvoiceDetailController', ['$scope', '$routeParams', '$location',
             'customerSrv', 'invoiceSvc',
                 function ($scope, $routeParams, $location, customerSrv, invoiceSvc) {

@@ -1,5 +1,5 @@
 ﻿<div class="navbar navbar-inner block-header">
-    <div class="pull-left">
+    <!--<div class="pull-left">
         <form class="form-inline">
             <div class="form-group">
                 <div class="dropdown">
@@ -28,10 +28,6 @@
                         }
                     </ul>
                 </div>
-                @*<label class="sr-only" for="dateRangeFilter">Date</label>
-                @Html.DropDownList("dateRangeFilter",
-                EnumHelper.GetSelectList(typeof(acct.common.Helper.DateRange.DateRangeFilter)),
-                new { @class = "form-control" })*@
             </div>
             <div class="form-group">
                 <div class="dropdown">
@@ -62,11 +58,17 @@
                 </div>
             </div>
         </form>
-    </div>
+    </div>-->
     <div class="pull-right">
-        <a class="btn btn-primary" href=@Url.Action("Create", "Invoice" ) role="button"><i class="fa fa-plus"></i> New</a>
+        <a class="btn btn-primary" ng-href='/invoice/create' role="button"><i class="fa fa-plus"></i> New</a>
     </div>
 </div>
 
-@Html.Partial("~/Views/Invoice/_List.cshtml", Model)
-@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page, dateRange = drParm, status = statusParm }))
+<div order-list orders="invoices"></div>
+
+<pagination total-items="totalItems"
+            ng-model="currentPage"
+            max-size="maxSize" class="pagination-md" boundary-links="true"
+            rotate="false" num-pages="numPages" items-per-page="pageSize" ng-change="pageChanged()"></pagination>
+
+<pre>Page: {{currentPage}} / {{numPages}} Total:{{totalItems}}</pre>

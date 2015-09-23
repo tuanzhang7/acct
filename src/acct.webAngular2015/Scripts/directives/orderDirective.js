@@ -19,6 +19,16 @@
             return '/views/directives/_orderLines.html';
         }
     };
+}).directive('orderList', function () {
+    return {
+        //restrict: 'E',
+        scope: {
+            orders: '=orders'
+        },
+        templateUrl: function (elem, attr) {
+            return '/views/directives/_orderList.html';
+        }
+    };
 }).directive('orderForm', function () {
     return {
         //restrict: 'E',

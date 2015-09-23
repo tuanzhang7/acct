@@ -5,11 +5,9 @@
 
     invoiceServiceModule.factory('invoiceSvc', function ($resource, settings) {
         var baseUrl = settings.baseUrl;
-        //return $resource('http://localhost:63267/api/invoice/customer/:id', {}, {
-        //    query: { method: 'GET', params: { id: '@id'}, isArray: true, headers: { 'auth-token': 'admin 1qazxsw@' } }
-        //})
+       
         return {
-            list: $resource(baseUrl + '/Customer?page=:page&pagesize=:pagesize', {}, {
+            list: $resource(baseUrl + '/invoice?page=:page&pagesize=:pagesize', {}, {
                 query: { method: 'GET', params: { page: '@page', pagesize: '@pagesize' }, isArray: true, headers: { 'auth-token': 'admin 1qazxsw@' } }
             }),
             listByCustomer: $resource(baseUrl + '/invoice/customer/:id', {}, {

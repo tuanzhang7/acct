@@ -53,6 +53,10 @@
                 templateUrl: '/views/customer/edit.html',
                 controller: 'CustomerEditController'
             })
+            .when('/invoice', {
+                templateUrl: '/views/invoice/list.html',
+                controller: 'InvoiceController'
+            })
             .when('/invoice/:id', {
                 templateUrl: '/views/invoice/detail.html',
                 controller: 'InvoiceDetailController'
