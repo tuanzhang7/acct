@@ -24,17 +24,8 @@
         </div>
         <div class="editor-field col-md-4">
             <div class="input-group">
-                
-                <input type="text" ng-model="order.CustomerId" 
-                       placeholder="Locations loaded via $http" 
-                       typeahead="address for address in getLocation($viewValue)" 
-                       typeahead-loading="loadingLocations" 
-                       typeahead-no-results="noResults" 
-                       class="form-control">
-                <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
-                <div ng-show="noResults">
-                    <i class="glyphicon glyphicon-remove"></i> No Results Found
-                </div>
+                <select class="form-control" ng-options="option.Id as option.Name for option in CustomerList"
+                        ng-model="order.CustomerId"></select>
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button">+</button>
                 </span>

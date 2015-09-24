@@ -64,7 +64,7 @@
                        $scope.page.setTitle('Edit Invoice ' + $scope.invoice.OrderNumber);
                    });
 
-                   //$scope.GSTList = GSTSrv.list.query();
+                   $scope.CustomerList = customerSrv.list.query();
                    $scope.edit = function () {
                        
                        $scope.invoice.$save(
