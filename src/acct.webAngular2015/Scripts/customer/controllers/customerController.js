@@ -14,30 +14,14 @@
 
                 get($scope.currentPage, pageSize);
                 function get(currentPage, pageSize) {
-                    //$http({ method: 'GET', url: 'http://localhost:63267/api/Customer', params: { page: $scope.currentPage, pagesize: pageSize } }
-                    //    ).then(function (response) {
-
-                    //        var Pagination = angular.fromJson(response.headers('X-Pagination'));
-                    //        var TotalCount = Pagination.TotalCount;
-                    //        var TotalPages = Pagination.TotalPages;
-
-                    //        //console.log(response.headers('X-Pagination'));
-                    //        //console.log(Pagination);
-
-                    //        $scope.totalItems = TotalCount;
-                    //        $scope.totalPages = TotalPages;
-                    //        $scope.customers = response.data;
-                    //    }, function (response) {
-                    //        $scope.data = response.data || "Request failed";
-                    //        $scope.status = response.status;
-                    //    });
                     customerSrv.list.query({ page: currentPage, pagesize: pageSize }, function (data, headers) {
                         console.log(headers('X-Pagination'));
+                        console.log(data);
                         $scope.customers = data;
-                        var Pagination = angular.fromJson(headers('X-Pagination'));
-                        var TotalCount = Pagination.TotalCount;
-                        var TotalPages = Pagination.TotalPages;
-                        console.log(Pagination);
+                        //var Pagination = angular.fromJson(headers('X-Pagination'));
+                        var TotalCount =100 //Pagination.TotalCount;
+                        var TotalPages = 10;//Pagination.TotalPages;
+                        
 
                         $scope.totalItems = TotalCount;
                         $scope.totalPages = TotalPages;
