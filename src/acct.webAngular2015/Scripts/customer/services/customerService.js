@@ -8,10 +8,10 @@
     customerServiceModule.factory("customerSrv", function ($resource, settings) {
         var baseUrl = settings.baseUrl;
         return {
-            list: $resource(baseUrl + '/Customer?page=:page&pagesize=:pagesize', {}, {
+            list: $resource(baseUrl + '/customer?page=:page&pagesize=:pagesize', {}, {
                 query: { method: 'GET', params: { page: '@page', pagesize: '@pagesize' }, isArray: true, headers: { 'auth-token': 'admin 1qazxsw@' } }
             }),
-            detail: $resource(baseUrl + '/Customer/:id', {}, {
+            detail: $resource(baseUrl + '/customer/:id', {}, {
                 create:{ method: 'POST'},
                 query: { method: 'GET', params: { id: '@id' } },
                 update: { method: 'PUT', params: { id: '@id' } },

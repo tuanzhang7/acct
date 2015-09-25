@@ -32,10 +32,12 @@
                     //        $scope.status = response.status;
                     //    });
                     customerSrv.list.query({ page: currentPage, pagesize: pageSize }, function (data, headers) {
+                        console.log(headers('X-Pagination'));
                         $scope.customers = data;
                         var Pagination = angular.fromJson(headers('X-Pagination'));
                         var TotalCount = Pagination.TotalCount;
                         var TotalPages = Pagination.TotalPages;
+                        console.log(Pagination);
 
                         $scope.totalItems = TotalCount;
                         $scope.totalPages = TotalPages;
