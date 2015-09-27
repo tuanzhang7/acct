@@ -3,20 +3,18 @@
 
     var GSTServiceModule = angular.module('GSTServices', ['ngResource']);
 
-    GSTServiceModule.factory("GSTSrv", function ($resource, settings) {
-        var baseUrl = settings.baseUrl;
+    GSTServiceModule.factory("GSTSrv", function ($resource, APIBase) {
+        var baseUrl = APIBase;
         return {
-            list: $resource(baseUrl + '/GST', {}, {
+            list: $resource(baseUrl + 'GST', {}, {
                 query: { method: 'GET', params: {}, isArray: true, headers: { } }
             }),
-            detail: $resource(baseUrl + '/GST/:id', {}, {
+            detail: $resource(baseUrl + 'GST/:id', {}, {
                 query: { method: 'GET', params: { id: '@id' } },
                 update: { method: 'PUT', params: { id: '@id' } },
                 delete: { method: 'DELETE', params: { id: '@id' } }
             }),
-            balance: $resource(baseUrl + '/GST/:id/balance', {}, {
-                query: { method: 'GET', params: { id: '@id' } }
-            })
+
         };
     });
 

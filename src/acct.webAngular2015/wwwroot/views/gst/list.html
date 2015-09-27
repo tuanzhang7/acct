@@ -1,0 +1,40 @@
+﻿<div class="navbar navbar-inner block-header margin-top30">
+    <div class="pull-right">
+        <a class="btn btn-primary" ng-href='/GST/create' role="button"><i class="fa fa-plus"></i> New</a>
+    </div>
+</div>
+<div id="bodyContainer">
+    <div >
+        <table class="table table-hover margin-top15">
+            <thead>
+                <tr>
+                    <th>
+                        Code
+                    </th>
+                    <th>
+                        Rate
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tr ng-repeat="gst in GSTs" ng-cloak>
+                <td>
+                    <a ng-href='/GST/{{gst.Id}}' ng-bind="gst.Code"></a>
+                </td>
+
+                <td>
+                    {{gst.Rate}}
+                </td>
+                <td>
+                    <a ng-href='/GST/edit/{{customer.Id}}' title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>
+                    <!--@*<a href='#' id='@item.Id' data-url="Customer" hreflang="delete_href">Delete</a>*@-->
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
+</div>
+        

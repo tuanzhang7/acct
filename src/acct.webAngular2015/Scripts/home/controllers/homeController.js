@@ -2,13 +2,14 @@
     'use strict';
 
     angular.module('acctApp')
-        .controller('HomeController', ['$scope', '$http', 'customerSrv', 'settings',
-            function ($scope, $http, customerSrv, settings) {
-                var baseUrl = settings.baseUrl;
+        .controller('HomeController', ['$scope', '$http', 'customerSrv', 'APIBase',
+            function ($scope, $http, customerSrv, APIBase) {
+                var baseUrl = APIBase;
+                console.log(baseUrl);
                 $scope.page.setTitle('Dashboard');
 
                 var year = '2014';
-                $http({ method: 'GET', url: baseUrl + '/Dashboard', params: {} }
+                $http({ method: 'GET', url: baseUrl + 'Dashboard', params: {} }
                     ).then(function (response) {
                         var dashboard = angular.fromJson(response.data);
 
@@ -22,7 +23,7 @@
                 showChartSalesman(year);
 
                 function showChart(year) {
-                    var url = baseUrl + '/Invoice/GetMonthlyTotal/' + year;
+                    var url = baseUrl + 'invoice/GetMonthlyTotal/' + year;
                     $http.get(url).then(function (response) {
                         var chartData = response.data;
                         var chart = AmCharts.makeChart("chartdiv", {
@@ -67,7 +68,7 @@
 
                 }
                 function showChartCustomer(year) {
-                    var url = baseUrl + '/Invoice/GetYearlyTopCustomer/' + year;
+                    var url = baseUrl + 'invoice/GetYearlyTopCustomer/' + year;
                     $.getJSON(url, function (chartData) {
                         var chart = AmCharts.makeChart("chartdiv_salesby_customer", {
                             "type": "pie",
@@ -86,7 +87,7 @@
                     });
                 }
                 function showChartSalesman(year) {
-                    var url = baseUrl + "/Invoice/GetYearlyTopSalesman/" + year;
+                    var url = baseUrl + "invoice/GetYearlyTopSalesman/" + year;
                     $.getJSON(url, function (chartData) {
                         var chart = AmCharts.makeChart("chartdiv_salesby_salesman", {
                             "type": "pie",

@@ -18,7 +18,7 @@
                         console.log(headers('X-Pagination'));
                         console.log(data);
                         $scope.customers = data;
-                        //var Pagination = angular.fromJson(headers('X-Pagination'));
+                        var Pagination = angular.fromJson(headers('X-Pagination'));
                         var TotalCount =100 //Pagination.TotalCount;
                         var TotalPages = 10;//Pagination.TotalPages;
                         
