@@ -15,12 +15,12 @@
                 get($scope.currentPage, pageSize);
                 function get(currentPage, pageSize) {
                     customerSrv.list.query({ page: currentPage, pagesize: pageSize }, function (data, headers) {
-                        console.log(headers('X-Pagination'));
-                        console.log(data);
+                        //console.log(headers('X-Pagination'));
+                        //console.log(data);
                         $scope.customers = data;
                         var Pagination = angular.fromJson(headers('X-Pagination'));
-                        var TotalCount =100 //Pagination.TotalCount;
-                        var TotalPages = 10;//Pagination.TotalPages;
+                        var TotalCount =Pagination.TotalCount;
+                        var TotalPages =Pagination.TotalPages;
                         
 
                         $scope.totalItems = TotalCount;

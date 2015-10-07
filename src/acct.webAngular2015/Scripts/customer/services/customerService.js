@@ -9,7 +9,7 @@
         var baseUrl = APIBase;
         return {
             list: $resource(baseUrl + 'customer?page=:page&pagesize=:pagesize', {}, {
-                query: { method: 'GET', params: { page: '@page', pagesize: '@pagesize' }, isArray: true, headers: { 'auth-token': 'admin 1qazxsw@' } }
+                query: { method: 'GET', params: { page: '@page', pagesize: '@pagesize' }, isArray: true, headers: {} }//'auth-token': 'admin 1qazxsw@'
             }),
             detail: $resource(baseUrl + 'customer/:id', {}, {
                 create:{ method: 'POST'},
