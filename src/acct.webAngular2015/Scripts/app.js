@@ -18,10 +18,20 @@
             fakeDelay: 100,
             protocol: window.location.protocol.split(':')[0],
             host: 'localhost',//window.location.hostname,
-            port: 3000,//63267,//String(window.location.port || 80),
+            port: 63267,//3000,//String(window.location.port || 80),
             path: '/api',
         }
-    })
+        })
+        .constant('Enum', {
+            DateRangeFilter: {
+                AnyTime: 0,
+                ThisYear: 1,
+                ThisMonth: 2,
+                Last3Month:3,
+                Last7Days: 4,
+                Last365Days: 5,
+            }
+        })
     //.config(function (Config, $provide) {
     //    //Decorate backend with awesomesauce
     //    if (Config.API.useMocks) $provide.decorator('$httpBackend', angular.mock.e2e.$httpBackendDecorator);
