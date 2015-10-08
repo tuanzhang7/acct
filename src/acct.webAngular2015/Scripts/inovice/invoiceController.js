@@ -2,8 +2,8 @@
     'use strict';
 
     angular.module('acctApp')
-        .controller('InvoiceController', ['$scope', '$http', '$location', 'customerSrv','invoiceSvc', 'settings',
-            function ($scope, $http, $location, customerSrv,invoiceSvc, settings) {
+        .controller('InvoiceController', ['$scope', '$http', '$location', 'customerSrv', 'invoiceSvc', 'settings',
+            function ($scope, $http, $location, customerSrv, invoiceSvc, settings) {
 
                 var pageSize = settings.pageSize;
                 $scope.pageSize = pageSize;
@@ -11,6 +11,25 @@
                 $scope.maxSize = 10;
                 $scope.page.setTitle('Invoice');
 
+
+                $scope.dateRangeEnum = {
+                    AnyTime: "Any Time",
+                    ThisYear: "Current Year",
+                    ThisMonth: "Current Month",
+                    Last3Month: "Past 3 Month",
+                    Last7Days: "Past 7 Days",
+                    Last365Days: "Past 365 Days",
+                };
+                $scope.statusEnum = {
+                    Unpaid: 1,
+                    Partial : 2,
+                    Paid : 3,
+                    Overdue: 4
+                }
+                $scope.statusParm = $location.search().status != null ? $location.search().status : "Open"; 
+                $scope.dateRangeParm = $location.search().dateRange != null ? $location.search().dateRange : "AnyTime";
+
+                
                 get($scope.currentPage, pageSize);
                 function get(currentPage, pageSize) {
                     invoiceSvc.list.query({ page: currentPage, pagesize: pageSize }, function (data, headers) {
@@ -42,7 +61,7 @@
                     $location.path('/invoice/' + id);
                 };
 
-                
+
 
             }])
         .controller('InvoiceDetailController', ['$scope', '$routeParams', '$location',
@@ -66,7 +85,7 @@
 
                    $scope.CustomerList = customerSrv.list.query();
                    $scope.edit = function () {
-                       
+
                        $scope.invoice.$save(
                            // success
                            function () {
@@ -92,7 +111,7 @@
                        });
                    };
 
-                }]);
+               }]);
 })();
 
 

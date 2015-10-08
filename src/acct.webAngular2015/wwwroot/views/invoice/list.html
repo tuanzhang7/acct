@@ -4,56 +4,45 @@
             <div class="form-group">
                 <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                        @if (string.IsNullOrEmpty(drParm))
-                        {
-                        <span>@EnumHelper.GetSelectList(typeof(acct.common.Helper.DateRange.DateRangeFilter))[0].Text</span>
-                        }
-                        else
-                        {
-                        <span>@EnumHelper.GetSelectList(typeof(acct.common.Helper.DateRange.DateRangeFilter))[int.Parse(drParm)].Text</span>
-                        }
+                        
+                        <span>
+                            {{dateRangeEnum[dateRangeParm]}}
+                        </span>
+                        
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                        @foreach (SelectListItem item in EnumHelper.GetSelectList(typeof(acct.common.Helper.DateRange.DateRangeFilter)))
-                        {
-                        <li role="presentation">
+                        <li role="presentation" ng-repeat="(key, value) in dateRangeEnum" ng-cloak>
                             <a role="menuitem" tabindex="-1"
-                               href='@Url.Action("Index", "Invoice", new { dateRange = item.Value, status = statusParm })'>
-                                @item.Text
-                                @if (item.Value == drParm)
-                                {<i class="fa fa-check"></i>}
+                               href='/invoice?dateRange={{key}}&status={{statusParm}}'>
+                                {{value}}
+                                <span ng-if="key == dateRangeParm">
+                                    <i class="fa fa-check"></i>
+                                </span>
                             </a>
                         </li>
-                        }
                     </ul>
+                    <!--<div date-ranage orders="transactions"></div>-->
                 </div>
             </div>
             <div class="form-group">
                 <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                        @if (string.IsNullOrEmpty(statusParm))
-                        {
-                        <span>Status: @EnumHelper.GetSelectList(typeof(acct.web.Helper.ControllerHelper.StatusFilter))[0].Text</span>
-                        }
-                        else
-                        {
-                        <span>Status: @statusParm</span>
-                        }
+                        <span>
+                            {{statusParm}}
+                        </span>
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                        @foreach (SelectListItem item in EnumHelper.GetSelectList(typeof(acct.web.Helper.ControllerHelper.StatusFilter)))
-                        {
-                        <li role="presentation">
+                        <li role="presentation" ng-repeat="(key, value) in statusEnum" ng-cloak>
                             <a role="menuitem" tabindex="-1"
-                               href='@Url.Action("Index", "Invoice", new { dateRange = drParm, status = item.Text })'>
-                                @item.Text
-                                @if (item.Text == statusParm)
-                                {<i class="fa fa-check"></i>}
+                               href='/invoice?dateRange={{dateRangeParm}}&status={{key}}'>
+                                {{key}}
+                                <span ng-if="key == dateRangeParm">
+                                    <i class="fa fa-check"></i>
+                                </span>
                             </a>
                         </li>
-                        }
                     </ul>
                 </div>
             </div>
