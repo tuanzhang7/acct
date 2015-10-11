@@ -30,9 +30,9 @@
                 $scope.dateRangeParm = $location.search().dateRange != null ? $location.search().dateRange : "AnyTime";
 
                 
-                get($scope.currentPage, pageSize);
-                function get(currentPage, pageSize) {
-                    invoiceSvc.list.query({ page: currentPage, pagesize: pageSize }, function (data, headers) {
+                get($scope.dateRangeParm, $scope.statusParm, $scope.currentPage, pageSize);
+                function get(dateRange, status,currentPage, pageSize) {
+                    invoiceSvc.list.query({ dateRange: dateRange, status: status, page: currentPage, pagesize: pageSize }, function (data, headers) {
                         $scope.invoices = data;
                         var Pagination = angular.fromJson(headers('X-Pagination'));
                         var TotalCount = Pagination.TotalCount;
@@ -43,7 +43,7 @@
                     });
                 }
                 $scope.pageChanged = function () {
-                    get($scope.currentPage, pageSize);
+                    get($scope.dateRangeParm, $scope.statusParm, $scope.currentPage, pageSize);
                 };
 
                 $scope.lookup = function (q) {
