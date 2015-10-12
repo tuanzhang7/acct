@@ -20,13 +20,14 @@
                     Last7Days: "Past 7 Days",
                     Last365Days: "Past 365 Days",
                 };
-                $scope.statusEnum = {
+                $scope.statusEnum ={
+                    All: 0,
                     Unpaid: 1,
                     Partial : 2,
                     Paid : 3,
                     Overdue: 4
                 }
-                $scope.statusParm = $location.search().status != null ? $location.search().status : "Open"; 
+                $scope.statusParm = $location.search().status != null ? $location.search().status : "All";
                 $scope.dateRangeParm = $location.search().dateRange != null ? $location.search().dateRange : "AnyTime";
 
                 

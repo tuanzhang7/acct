@@ -7,6 +7,9 @@
             <th>
                 Order Date
             </th>
+            <th ng-if="skipCustomer!=true">
+                Customer
+            </th>
             <th>
                 Remark
             </th>
@@ -26,6 +29,9 @@
         </td>
         <td>
             {{invoice.OrderDate |date:'dd/MM/yyyy'}}
+        </td>
+        <td ng-if="skipCustomer!=true">
+            {{invoice.Customer.Name}}
         </td>
         <td>
             {{invoice.Remark}}

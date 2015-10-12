@@ -23,7 +23,8 @@
     return {
         //restrict: 'E',
         scope: {
-            orders: '=orders'
+            orders: '=orders',
+            skipCustomer:'=skipCustomer'
         },
         templateUrl: function (elem, attr) {
             return '/views/directives/_orderList.html';
