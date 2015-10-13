@@ -62,6 +62,7 @@
                     $location.path('/invoice/' + id);
                 };
 
+                
 
 
             }])
@@ -73,6 +74,13 @@
                         $scope.invoice = data;
                         $scope.page.setTitle('Invoice ' + $scope.invoice.OrderNumber);
                     });
+
+                    $scope.print = function (id) {
+                        console.log('print invoice:' + id);
+                        var downloadPath = "http://localhost:63267/api/Invoice/print/" + id;
+                        window.open(downloadPath, '_self', '');
+                    }
+
                 }])
     .controller('InvoiceEditController', ['$scope', '$routeParams', '$location',
             'customerSrv', 'invoiceSvc',
