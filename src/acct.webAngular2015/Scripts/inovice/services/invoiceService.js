@@ -7,8 +7,12 @@
         var baseUrl = APIBase;
        
         return {
-            list: $resource(baseUrl + 'invoice?dateRange=:dateRange&status=:status&page=:page&pagesize=:pagesize', {}, {
-                query: { method: 'GET', params: { dateRange: '@dateRange', status: '@status', page: '@page', pagesize: '@pagesize' }, isArray: true, headers: {} }
+            list: $resource(baseUrl + 'invoice', {dateRange:'@dateRange',status:'@status',page:'@page',pagesize:'@pagesize'}, {
+                query: {
+                    method: 'GET',
+                    isArray: true,
+                    headers: {}
+                }
             }),
             listByCustomer: $resource(baseUrl + 'invoice/customer/:id', {}, {
                 query: { method: 'GET', params: { id: '@id' }, isArray: true, headers: {  } }

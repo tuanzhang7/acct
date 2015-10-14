@@ -34,7 +34,7 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                        <li role="presentation" ng-repeat="(key, value) in statusEnum" ng-cloak>
+                        <!--<li role="presentation" ng-repeat="(key, value) in statusEnum" ng-cloak>
                             <a role="menuitem" tabindex="-1"
                                href='/invoice?dateRange={{dateRangeParm}}&status={{key}}'>
                                 {{key}}
@@ -42,6 +42,17 @@
                                     <i class="fa fa-check"></i>
                                 </span>
                             </a>
+                        </li>-->
+                        <li role="presentation" ng-repeat-start="(key, value) in statusEnum" ng-cloak>
+                            <a role="menuitem" tabindex="-1"
+                               href='/invoice?dateRange={{dateRangeParm}}&status={{key}}'>
+                                {{key}}
+                                <span ng-if="key == statusParm">
+                                    <i class="fa fa-check"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li role="separator" class="divider" ng-repeat-end ng-if='key=="Open"'>
                         </li>
                     </ul>
                 </div>
