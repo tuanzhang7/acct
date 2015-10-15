@@ -5,6 +5,7 @@
 
     angular.module('acctApp', [
         'ngRoute',
+        'LocalStorageModule',
         //'ngMockE2E',
         'ui.bootstrap',
         'customerServices',
@@ -33,6 +34,37 @@
                 Last365Days: 5,
             }
         })
+   
+    .factory('APISetting', function (Config) {
+        var apiBase = Config.API.protocol + '://' + Config.API.host + ':' + Config.API.port + Config.API.path + '/';
+        var urlBase = Config.API.protocol + '://' + Config.API.host + ':' + Config.API.port +  '/';
+        return (
+            {
+                apiBase: apiBase,
+                urlBase: urlBase
+            });
+    })
+    .constant('settings', {
+        pageSize: 10,
+        clientId: 'ngAuthApp',
+        apiServiceBaseUri: 'ngAuthApp'
+    })
+    .config(config)
+    .config(['datepickerConfig', 'datepickerPopupConfig', function (datepickerConfig, datepickerPopupConfig) {
+        datepickerConfig.showWeeks = false;
+        datepickerPopupConfig.showButtonBar = false;
+        datepickerPopupConfig.datepickerPopup = 'dd/MM/yyyy';
+    }])
+    .run(['$rootScope', function ($rootScope) {
+        $rootScope.page = {
+            setTitle: function (title) {
+                this.title = title;
+            }
+        }
+        $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
+            $rootScope.page.setTitle(current.$$route.title);
+        });
+    }])
     //.config(function (Config, $provide) {
     //    //Decorate backend with awesomesauce
     //    if (Config.API.useMocks) $provide.decorator('$httpBackend', angular.mock.e2e.$httpBackendDecorator);
@@ -66,36 +98,6 @@
     //        }
     //    })
     //})
-    .factory('APISetting', function (Config) {
-        var apiBase = Config.API.protocol + '://' + Config.API.host + ':' + Config.API.port + Config.API.path + '/';
-        var urlBase = Config.API.protocol + '://' + Config.API.host + ':' + Config.API.port +  '/';
-        return (
-            {
-                apiBase: apiBase,
-                urlBase: urlBase
-            });
-    })
-    .constant('settings', {
-        pageSize: 10,
-        clientId: 'ngAuthApp',
-        apiServiceBaseUri: 'ngAuthApp'
-    })
-    .config(config)
-    .config(['datepickerConfig', 'datepickerPopupConfig', function (datepickerConfig, datepickerPopupConfig) {
-        datepickerConfig.showWeeks = false;
-        datepickerPopupConfig.showButtonBar = false;
-        datepickerPopupConfig.datepickerPopup = 'dd/MM/yyyy';
-    }])
-    .run(['$rootScope', function ($rootScope) {
-        $rootScope.page = {
-            setTitle: function (title) {
-                this.title = title;
-            }
-        }
-        $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
-            $rootScope.page.setTitle(current.$$route.title);
-        });
-    }])
     //.run(function (Config,APISetting, $httpBackend) {
     //    //Only load mocks if config says so
     //    if (!Config.API.useMocks) return;
@@ -203,6 +205,14 @@
             .when('/login', {
                 templateUrl: '/views/account/login.html',
                 controller: 'loginController'
+            })
+            .when("/signup", {
+                controller: "signupController",
+                templateUrl: "/app/views/signup.html"
+            })
+            .when("/tokens", {
+                controller: "tokensManagerController",
+                templateUrl: "/app/views/tokens.html"
             })
             .when('/customer', {
                 templateUrl: '/views/customer/list.html',

@@ -4,7 +4,7 @@ var authServiceModule = angular.module('authServices', ['ngResource']);
 authServiceModule.factory('authService', ['$http', '$q', 'localStorageService', 'settings', 'APISetting',
     function ($http, $q, localStorageService, settings,APISetting) {
 
-        var serviceBase = APISetting.apiBase;
+        var serviceBase = APISetting.urlBase;
     var authServiceFactory = {};
 
     var _authentication = {

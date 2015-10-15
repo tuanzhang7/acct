@@ -28,7 +28,7 @@
 
                 var redirectUri = location.protocol + '//' + location.host + '/authcomplete.html';
 
-                var externalProviderUrl = APISetting + "Account/ExternalLogin?provider=" + provider
+                var externalProviderUrl = APISetting.apiBase + "Account/ExternalLogin?provider=" + provider
                                                                             + "&response_type=token&client_id=" + settings.clientId
                                                                             + "&redirect_uri=" + redirectUri;
                 window.$windowScope = $scope;
