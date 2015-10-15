@@ -5,8 +5,8 @@
     
 
 
-    customerServiceModule.factory("customerSrv", function ($resource, APIBase) {
-        var baseUrl = APIBase;
+    customerServiceModule.factory("customerSrv", function ($resource, APISetting) {
+        var baseUrl = APISetting.apiBase;
         return {
             list: $resource(baseUrl + 'customer?page=:page&pagesize=:pagesize', {}, {
                 query: { method: 'GET', params: { page: '@page', pagesize: '@pagesize' }, isArray: true, headers: {} }//'auth-token': 'admin 1qazxsw@'

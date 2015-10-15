@@ -73,13 +73,13 @@
                     $location.path('/invoice/' + id);
                 };
                 $scope.print = function (id) {
-                    var downloadPath = APIBase + "invoice/print/" + id;
+                    var downloadPath = APISetting + "invoice/print/" + id;
                     window.open(downloadPath, '_self', '');
                 }
             }])
         .controller('InvoiceDetailController', ['$scope', '$routeParams', '$location',
-            'customerSrv', 'invoiceSvc', 'APIBase',
-                function ($scope, $routeParams, $location, customerSrv, invoiceSvc, APIBase) {
+            'customerSrv', 'invoiceSvc', 'APISetting',
+                function ($scope, $routeParams, $location, customerSrv, invoiceSvc, APISetting) {
                     $scope.invoice = null;
                     invoiceSvc.detail.query({ id: $routeParams.id }).$promise.then(function (data) {
                         $scope.invoice = data;
@@ -87,14 +87,14 @@
                     });
 
                     $scope.print = function (id) {
-                        var downloadPath = APIBase + "invoice/print/" + id;
+                        var downloadPath = APISetting.apiBase + "invoice/print/" + id;
                         window.open(downloadPath, '_self', '');
                     }
 
                 }])
-        .controller('InvoicePrintController', ['$scope', '$routeParams', '$location','APIBase',
-                function ($scope, $routeParams, $location, APIBase) {
-                    var downloadPath = APIBase + "invoice/print/" + $routeParams.id;
+        .controller('InvoicePrintController', ['$scope', '$routeParams', '$location','APISetting',
+                function ($scope, $routeParams, $location, APISetting) {
+                    var downloadPath = APISetting + "invoice/print/" + $routeParams.id;
                     window.open(downloadPath, '_self', '');
                 }])
     .controller('InvoiceEditController', ['$scope', '$routeParams', '$location',

@@ -3,8 +3,8 @@
 
     var GSTServiceModule = angular.module('GSTServices', ['ngResource']);
 
-    GSTServiceModule.factory("GSTSrv", function ($resource, APIBase) {
-        var baseUrl = APIBase;
+    GSTServiceModule.factory("GSTSrv", function ($resource, APISetting) {
+        var baseUrl = APISetting.apiBase;
         return {
             list: $resource(baseUrl + 'GST', {}, {
                 query: { method: 'GET', params: {}, isArray: true, headers: { } }

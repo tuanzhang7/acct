@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('acctApp')
-        .controller('HomeController', ['$scope', '$http', 'customerSrv', 'APIBase',
-            function ($scope, $http, customerSrv, APIBase) {
-                var baseUrl = APIBase;
+        .controller('HomeController', ['$scope', '$http', 'customerSrv', 'APISetting',
+            function ($scope, $http, customerSrv, APISetting) {
+                var baseUrl = APISetting.apiBase;
                 console.log(baseUrl);
                 $scope.page.setTitle('Dashboard');
 

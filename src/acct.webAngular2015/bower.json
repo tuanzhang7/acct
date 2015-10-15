@@ -4,7 +4,8 @@
   "dependencies": {
     "amcharts3": "3.17.0",
     "angular-bootstrap": "*",
-    "bootstrap": "3.3.5"
+    "bootstrap": "3.3.5",
+    "angular-local-storage": "0.2.2"
    
   }
 }

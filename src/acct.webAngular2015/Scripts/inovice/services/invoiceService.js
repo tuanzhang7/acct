@@ -3,9 +3,8 @@
 
     var invoiceServiceModule = angular.module('invoiceServices', ['ngResource']);
 
-    invoiceServiceModule.factory('invoiceSvc', function ($resource,  APIBase) {
-        var baseUrl = APIBase;
-       
+    invoiceServiceModule.factory('invoiceSvc', function ($resource,  APISetting) {
+        var baseUrl = APISetting.apiBase;
         return {
             list: $resource(baseUrl + 'invoice', {dateRange:'@dateRange',status:'@status',page:'@page',pagesize:'@pagesize'}, {
                 query: {

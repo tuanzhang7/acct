@@ -9,7 +9,8 @@
         'ui.bootstrap',
         'customerServices',
         'invoiceServices',
-        'GSTServices'
+        'GSTServices',
+        'authServices'
     ])
     .constant('Config', {
         viewDir: 'views/',
@@ -65,13 +66,19 @@
     //        }
     //    })
     //})
-    .factory('APIBase', function (Config) {
+    .factory('APISetting', function (Config) {
         var apiBase = Config.API.protocol + '://' + Config.API.host + ':' + Config.API.port + Config.API.path + '/';
-        console.log(apiBase)
-        return (apiBase);
+        var urlBase = Config.API.protocol + '://' + Config.API.host + ':' + Config.API.port +  '/';
+        return (
+            {
+                apiBase: apiBase,
+                urlBase: urlBase
+            });
     })
     .constant('settings', {
-        pageSize: 10
+        pageSize: 10,
+        clientId: 'ngAuthApp',
+        apiServiceBaseUri: 'ngAuthApp'
     })
     .config(config)
     .config(['datepickerConfig', 'datepickerPopupConfig', function (datepickerConfig, datepickerPopupConfig) {
@@ -89,7 +96,7 @@
             $rootScope.page.setTitle(current.$$route.title);
         });
     }])
-    //.run(function (Config,APIBase, $httpBackend) {
+    //.run(function (Config,APISetting, $httpBackend) {
     //    //Only load mocks if config says so
     //    if (!Config.API.useMocks) return;
 
@@ -111,9 +118,9 @@
     //        return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
     //    }
 
-    //    var customerUrl = APIBase + 'customer';
-    //    var invoiceUrl = APIBase + 'invoice';
-    //    var GSTUrl = APIBase + 'GST';
+    //    var customerUrl = APISetting + 'customer';
+    //    var invoiceUrl = APISetting + 'invoice';
+    //    var GSTUrl = APISetting + 'GST';
 
     //    $httpBackend.whenGET(/^\/views\//).passThrough();
 
@@ -179,7 +186,7 @@
     //    });
 
     //    ///Dashboard
-    //    rege = regexEscape(APIBase+"Dashboard");
+    //    rege = regexEscape(APISetting+"Dashboard");
     //    $httpBackend.whenGET(new RegExp(rege)).respond(function (method, url, data, headers) {
     //        return [200, dashBoard, {}, "OK"];
     //    });
@@ -192,6 +199,10 @@
             .when('/', {
                 templateUrl: '/views/home/index.html',
                 controller: 'HomeController'
+            })
+            .when('/login', {
+                templateUrl: '/views/account/login.html',
+                controller: 'loginController'
             })
             .when('/customer', {
                 templateUrl: '/views/customer/list.html',
