@@ -69,7 +69,8 @@
                 }
                 function showChartCustomer(year) {
                     var url = baseUrl + 'invoice/GetYearlyTopCustomer/' + year;
-                    $.getJSON(url, function (chartData) {
+                    $http.get(url).then(function (response) {
+                        var chartData = response.data;
                         var chart = AmCharts.makeChart("chartdiv_salesby_customer", {
                             "type": "pie",
                             "theme": "light",
@@ -88,7 +89,8 @@
                 }
                 function showChartSalesman(year) {
                     var url = baseUrl + "invoice/GetYearlyTopSalesman/" + year;
-                    $.getJSON(url, function (chartData) {
+                    $http.get(url).then(function (response) {
+                        var chartData = response.data;
                         var chart = AmCharts.makeChart("chartdiv_salesby_salesman", {
                             "type": "pie",
                             "theme": "light",
