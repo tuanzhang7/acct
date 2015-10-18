@@ -37,7 +37,6 @@
                 else if ($location.search().status == "Open") {
                     _statusParms = ['Unpaid', 'Partial', 'Overdue'];
                 }
-                console.log(_statusParms);
 
                 $scope.dateRangeParm = $location.search().dateRange != null ? $location.search().dateRange : "AnyTime";
 

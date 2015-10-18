@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    config.$inject = ['$routeProvider', '$locationProvider'];
+    configRoute.$inject = ['$routeProvider', '$locationProvider'];
 
     angular.module('acctApp', [
         'ngRoute',
@@ -51,7 +51,7 @@
         clientId: 'ngAuthApp',
         apiServiceBaseUri: 'ngAuthApp'
     })
-    .config(config)
+    .config(configRoute)
     .config(['datepickerConfig', 'datepickerPopupConfig', function (datepickerConfig, datepickerPopupConfig) {
         datepickerConfig.showWeeks = false;
         datepickerPopupConfig.showButtonBar = false;
@@ -63,9 +63,9 @@
     .run(['authService', function (authService) {
         authService.fillAuthData();
     }])
-    .run(['$rootScope', //'$location', '$state', 'authService',
-        function ($rootScope, $location, $state, authService) {
-        console.log('$rootScope:......');
+    .run(['$rootScope', '$location',  'authService',
+        function ($rootScope, $location, authService) {
+
         $rootScope.page = {
             setTitle: function (title) {
                 this.title = title;
@@ -74,21 +74,17 @@
         $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
             $rootScope.page.setTitle(current.$$route.title);
         });
-        $rootScope.$on('$stateChangeStart', function (e, toState, toParams
-                                                   , fromState, fromParams) {
-            console.log('$stateChangeStart:......');
-            var isLogin = toState.name === "login";
-            if (isLogin) {
-                return; // no need to redirect 
-            }
+        $rootScope.$on('$routeChangeStart', function (event, next, current) {
+            //console.log('$routeChangeStart:......');
 
-            // now, redirect only not authenticated
-
-            var userInfo = authService.getUserInfo();
-
-            if (userInfo.authenticated === false) {
-                e.preventDefault(); // stop current execution
-                $state.go('login'); // go to login
+            if (authService.authentication.isAuth==false) {
+                // no logged user, we should be going to #login
+                if (next.templateUrl == "/views/account/login.html") {
+                    // already going to #login, no redirect needed
+                } else {
+                    // not going to #login, we should redirect now
+                    $location.path("/login");
+                }
             }
         });
         
@@ -96,8 +92,8 @@
 
     ;
 
-
-    function config($routeProvider, $locationProvider) {
+    
+    function configRoute($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {
                 templateUrl: '/views/home/index.html',

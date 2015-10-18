@@ -5,7 +5,7 @@
         .controller('HomeController', ['$scope', '$http', 'customerSrv', 'APISetting',
             function ($scope, $http, customerSrv, APISetting) {
                 var baseUrl = APISetting.apiBase;
-                console.log(baseUrl);
+                //console.log(baseUrl);
                 $scope.page.setTitle('Dashboard');
 
                 var year = '2014';
