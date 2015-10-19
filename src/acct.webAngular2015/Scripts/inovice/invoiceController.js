@@ -76,9 +76,9 @@
                     window.open(downloadPath, '_self', '');
                 }
             }])
-        .controller('InvoiceDetailController', ['$scope', '$routeParams', '$location',
+        .controller('InvoiceDetailController', ['$scope', '$routeParams', '$location', '$http',
             'customerSrv', 'invoiceSvc', 'APISetting',
-                function ($scope, $routeParams, $location, customerSrv, invoiceSvc, APISetting) {
+                function ($scope, $routeParams, $location, $http, customerSrv, invoiceSvc, APISetting) {
                     $scope.invoice = null;
                     invoiceSvc.detail.query({ id: $routeParams.id }).$promise.then(function (data) {
                         $scope.invoice = data;
@@ -87,11 +87,41 @@
 
                     $scope.print = function (id) {
                         var downloadPath = APISetting.apiBase + "invoice/print/" + id;
-                        window.open(downloadPath, '_self', '');
+                        //window.open(downloadPath, '_self', ''); not working when server need authentication
+                        var fileName = 'invoice_' + id+".pdf";
+                        $http.get(downloadPath,null,{
+                            responseType: 'arraybuffer'
+                        }).
+                            success(function (data) {
+
+                                //var anchor = angular.element('<a/>');
+                                //anchor.css({ display: 'none' }); // Make sure it's not visible
+                                //angular.element(document.body).append(anchor); // Attach to document
+
+                                //anchor.attr({
+                                //    href: 'data:application/pdf;charset=utf-8,' + encodeURI(data),
+                                //    target: '_blank',
+                                //    download: fileName
+                                //})[0].click();
+
+                                //anchor.remove(); // Clean it up afterwards
+
+                                var file = new Blob([data], { type: 'application/pdf' });
+                                var fileURL = URL.createObjectURL(file);
+                                window.open(fileURL);
+
+                                
+
+                            }).
+                            error(function (data, status, headers, config) {
+                                console.log("error when download");
+                                // if there's an error you should see it here
+                            });
+
                     }
 
                 }])
-        .controller('InvoicePrintController', ['$scope', '$routeParams', '$location','APISetting',
+        .controller('InvoicePrintController', ['$scope', '$routeParams', '$location', 'APISetting',
                 function ($scope, $routeParams, $location, APISetting) {
                     var downloadPath = APISetting + "invoice/print/" + $routeParams.id;
                     window.open(downloadPath, '_self', '');
