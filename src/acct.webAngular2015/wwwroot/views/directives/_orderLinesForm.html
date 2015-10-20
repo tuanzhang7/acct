@@ -1,0 +1,43 @@
+﻿<table class="table table-hover margin-top30">
+    <thead>
+        <tr>
+            <th>
+                Description
+            </th>
+            <th class="text-right">
+                Qty
+            </th>
+            <th class="text-right">
+                Unit Price
+            </th>
+            <th class="text-right">
+                Discount
+            </th>
+            <th class="text-right">
+                Line Total
+            </th>
+        </tr>
+    </thead>
+    <tr id='row{{line.Id}}' data-id="{{line.Id}}" ng-repeat="line in lines" ng-cloak>
+        <td><div class="editor-long"><input class="form-control" type="text" name="OrderDetails[{{line.Id}}].Description" data-id="{{line.Id}}" value="{{line.Description}}" /></div></td>
+        <td><div class="editor-numeric-short calc"><input class="form-control" type="text" name="OrderDetails[{{line.Id}}].Qty" data-id="{{line.Id}}" value="{{line.Qty}}" /></div></td>
+        <td><div class="editor-numeric calc"><input class="form-control" type="text" name="OrderDetails[{{line.Id}}].UnitPrice" data-id="{{line.Id}}" value="{{line.UnitPrice}}" /></div></td>
+        <td><div class="editor-numeric-short calc"><input class="form-control" type="text" name="OrderDetails[{{line.Id}}].Discount" data-id="{{line.Id}}" value=" {{line.Discount}}" /></div></td>
+        <td class="text-right"><div class="editor-numeric"><span name="OrderDetails[{{line.Id}}].Amount" data-id="{{line.Id}}"></span></div></td>
+
+        <td>
+            <a href='#' id='@item.Id' data-url="OrderDetails" title="Delete" hreflang="delete_href"><i class="glyphicon glyphicon-trash"></i></a>
+        </td>
+    </tr>
+    <tfoot>
+        <tr data-counter="{{i}}" ng-repeat="i in [0,1]">
+            <td><div class="editor-long"><input class="form-control" type="text" name="OrderDetail[{{i}}].Description" /></div></td>
+            <td><div class="editor-numeric-short calc"><input class="form-control text-right" type="text" name="OrderDetail[{{i}}].Qty" value="0" /></div></td>
+            <td><div class="editor-numeric calc"><input class="form-control" type="text" name="OrderDetail[{{i}}].UnitPrice" value="0" /></div></td>
+            <td><div class="editor-numeric-short calc"><input class="form-control" type="text" name="OrderDetail[{{i}}].Discount" value="0" /></div></td>
+            <td class="text-right"><div class="editor-numeric"><span name="OrderDetail[{{i}}].Amount"></span></div></td>
+            <td></td>
+        </tr>
+    </tfoot>
+</table>
+<a href="#" title="Add more" id="add"> <i class="glyphicon glyphicon-plus"></i>  </a>

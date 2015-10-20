@@ -30,6 +30,16 @@
             return '/views/directives/_orderList.html';
         }
     };
+}).directive('orderLinesForm', function () {
+    return {
+        //restrict: 'E',
+        scope: {
+            lines: '=lines'
+        },
+        templateUrl: function (elem, attr) {
+            return '/views/directives/_orderLinesForm.html';
+        }
+    };
 }).directive('orderForm', function () {
     return {
         //restrict: 'E',
