@@ -87,31 +87,20 @@
 
                     $scope.print = function (id) {
                         var downloadPath = APISetting.apiBase + "invoice/print/" + id;
-                        //window.open(downloadPath, '_self', ''); not working when server need authentication
-                        var fileName = 'invoice_' + id+".pdf";
-                        $http.get(downloadPath,null,{
+                        //window.open(downloadPath, '_self', ''); //not working when server need authentication
+                        
+                        $http.get(downloadPath, {
                             responseType: 'arraybuffer'
                         }).
-                            success(function (data) {
-
-                                //var anchor = angular.element('<a/>');
-                                //anchor.css({ display: 'none' }); // Make sure it's not visible
-                                //angular.element(document.body).append(anchor); // Attach to document
-
-                                //anchor.attr({
-                                //    href: 'data:application/pdf;charset=utf-8,' + encodeURI(data),
-                                //    target: '_blank',
-                                //    download: fileName
-                                //})[0].click();
-
-                                //anchor.remove(); // Clean it up afterwards
-
+                            success(function (data, status, headers, config) {
+                                var contentDisposition = headers('Content-Disposition');
+                                console.log(contentDisposition);
+                                var filenameExp = RegExp("filename=(.*)");
+                                var fileName = filenameExp.exec(contentDisposition)[1];
+                                console.log(fileName);
                                 var file = new Blob([data], { type: 'application/pdf' });
                                 var fileURL = URL.createObjectURL(file);
-                                window.open(fileURL);
-
-                                
-
+                                saveAs(file, fileName);
                             }).
                             error(function (data, status, headers, config) {
                                 console.log("error when download");
@@ -136,7 +125,7 @@
                        $scope.page.setTitle('Edit Invoice ' + $scope.invoice.OrderNumber);
                    });
 
-                   $scope.CustomerList = customerSrv.list.query();
+                   //$scope.customerList = customerSrv.list.query();
                    $scope.edit = function () {
 
                        $scope.invoice.$save(

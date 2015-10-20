@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C41F4C03-8C1D-4494-AFD1-2F61D1314E5B}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
+		src\acct.webAngular2015\run.bat = src\acct.webAngular2015\run.bat
 	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "acct.webAngular2015", "src\acct.webAngular2015\acct.webAngular2015.xproj", "{815E59CF-1ABD-4377-B0B7-1D909AD5FB37}"

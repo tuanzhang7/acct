@@ -22,15 +22,20 @@
         <div class="editor-label col-md-2">
             Customer
         </div>
-        <div class="editor-field col-md-4">
+        <!--<div class="editor-field col-md-4">
             <div class="input-group">
-                <select class="form-control" ng-options="option.Id as option.Name for option in CustomerList"
+                <select class="form-control" ng-options="option.Id as option.Name for option in customerList"
                         ng-model="order.CustomerId"></select>
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button">+</button>
                 </span>
 
-            </div><!-- /input-group -->
+            </div>
+        </div>-->
+        <div class="editor-field col-md-4">
+            
+                <input type="text" class="form-control" ng-model="order.Customer.Name" />
+                <!--<a ng-href='/customer/{{order.CustomerId}}' ng-bind="order.Customer.Name"></a>-->
         </div>
         <div class="col-md-1">
         </div>

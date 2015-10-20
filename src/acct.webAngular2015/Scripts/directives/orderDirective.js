@@ -34,7 +34,7 @@
     return {
         //restrict: 'E',
         scope: {
-            order: '=order'
+            order: '=order',
         },
         templateUrl: function (elem, attr) {
             return '/views/directives/_orderForm.html';
