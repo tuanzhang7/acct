@@ -31,6 +31,18 @@
         }
     };
 }).directive('orderLinesForm', function () {
+    var link = function (scope, element, attrs) {
+        scope.addRow = function () {
+            console.log("addrow" + scope.lines.length);
+            scope.lines.push(
+            {
+                Qty: 0,
+                UnitPrice: 0,
+                Discount: 0
+            });
+        }
+    };
+
     return {
         //restrict: 'E',
         scope: {
@@ -38,7 +50,8 @@
         },
         templateUrl: function (elem, attr) {
             return '/views/directives/_orderLinesForm.html';
-        }
+        },
+        link: link
     };
 }).directive('orderForm', function () {
     return {

@@ -5,8 +5,9 @@
     "amcharts3": "3.17.0",
     "angular-bootstrap": "*",
     "bootstrap": "3.3.5",
-    "angular-local-storage": "0.2.2",
-    "angular-ui-router": "0.2.15"
-   
+    "angular-local-storage": "0.2.2"
+  },
+  "resolutions": {
+    "angular": ">= 1.0.8"
   }
 }

@@ -31,15 +31,16 @@
             <a href='#' id='@item.Id' data-url="OrderDetails" title="Delete" hreflang="delete_href"><i class="glyphicon glyphicon-trash"></i></a>
         </td>
     </tr>
-    <tfoot>
+    
+    <!--<tfoot>
         <tr data-counter="{{i}}" ng-repeat="i in [0,1]">
-            <td><div class="editor-long"><input class="form-control" type="text" name="OrderDetail[{{i}}].Description" /></div></td>
-            <td><div class="editor-numeric-short calc"><input class="form-control text-right" type="text" name="OrderDetail[{{i}}].Qty" value="0" /></div></td>
-            <td><div class="editor-numeric calc"><input class="form-control" type="text" name="OrderDetail[{{i}}].UnitPrice" value="0" /></div></td>
-            <td><div class="editor-numeric-short calc"><input class="form-control" type="text" name="OrderDetail[{{i}}].Discount" value="0" /></div></td>
-            <td class="text-right"><div class="editor-numeric"><span name="OrderDetail[{{i}}].Amount"></span></div></td>
+            <td><div class="editor-long"><input class="form-control" type="text" name="OrderDetail[{{i}}].Description" ng-model="line.Description"/></div></td>
+            <td><div class="editor-numeric-short calc"><input class="form-control text-right" type="text" name="OrderDetail[{{i}}].Qty" ng-model="line.Qty" ng-init="line.Qty='0'"/></div></td>
+            <td><div class="editor-numeric calc"><input class="form-control" type="text" name="OrderDetail[{{i}}].UnitPrice" ng-model="line.UnitPrice"  ng-init="line.UnitPrice='0'"/></div></td>
+            <td><div class="editor-numeric-short calc"><input class="form-control" type="text" name="OrderDetail[{{i}}].Discount" value="0" ng-model=" line.Discount" ng-init="line.Discount='0'"/></div></td>
+            <td class="text-right"><div class="editor-numeric"><span name="OrderDetail[{{i}}].Amount">{{line.Qty * line.UnitPrice}}</span></div></td>
             <td></td>
         </tr>
-    </tfoot>
+    </tfoot>-->
 </table>
-<a href="#" title="Add more" id="add"> <i class="glyphicon glyphicon-plus"></i>  </a>
+<a href="#" title="Add more" id="add" ng-click="addRow()"> <i class="glyphicon glyphicon-plus"></i>  </a>
