@@ -33,7 +33,6 @@
 }).directive('orderLinesForm', function () {
     var link = function (scope, element, attrs) {
         scope.addRow = function () {
-            console.log("addrow" + scope.lines.length);
             scope.lines.push(
             {
                 Qty: 0,

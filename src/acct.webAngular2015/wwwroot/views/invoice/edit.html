@@ -1,10 +1,12 @@
 ﻿<div id="bodyContainer">
     <form ng-submit="edit()">
-        <div order-form order="invoice" ></div>
+        <div order-form order="invoice"></div>
+
+        <div order-lines-form lines="invoice.OrderDetail"></div>
+        <p>
+            <input type="submit" value="Save"/>
+        </p>
     </form>
-    <div order-lines-form lines="invoice.OrderDetail"></div>
 </div>
-<p>
-    <input type="submit" value="Save" />
-</p>
+
 <script src="~/Scripts/order/create.js"></script>

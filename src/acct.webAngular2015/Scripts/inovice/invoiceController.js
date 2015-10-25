@@ -40,10 +40,14 @@
 
                 $scope.dateRangeParm = $location.search().dateRange != null ? $location.search().dateRange : "AnyTime";
 
-
                 get($scope.dateRangeParm, _statusParms, $scope.currentPage, pageSize);
                 function get(dateRange, status, currentPage, pageSize) {
-                    invoiceSvc.list.query({ dateRange: dateRange, status: status, page: currentPage, pagesize: pageSize }, function (data, headers) {
+                    invoiceSvc.list.query({
+                        dateRange: dateRange,
+                        status: status,
+                        page: currentPage,
+                        pagesize: pageSize
+                    }, function (data, headers) {
                         $scope.invoices = data;
                         var Pagination = angular.fromJson(headers('X-Pagination'));
                         var TotalCount = Pagination.TotalCount;
@@ -53,12 +57,13 @@
                         $scope.totalPages = TotalPages;
                     });
                 }
+
                 $scope.pageChanged = function () {
                     get($scope.dateRangeParm, _statusParms, $scope.currentPage, pageSize);
                 };
 
                 $scope.lookup = function (q) {
-                    return customerSrv.lookup.query({ q: q, limit: 10 }).$promise.then(function (data) {
+                    return customerSrv.lookup.query({q: q, limit: 10}).$promise.then(function (data) {
                         return data;
                     });
                 };
@@ -78,82 +83,83 @@
             }])
         .controller('InvoiceDetailController', ['$scope', '$routeParams', '$location', '$http',
             'customerSrv', 'invoiceSvc', 'APISetting',
-                function ($scope, $routeParams, $location, $http, customerSrv, invoiceSvc, APISetting) {
-                    $scope.invoice = null;
-                    invoiceSvc.detail.query({ id: $routeParams.id }).$promise.then(function (data) {
-                        $scope.invoice = data;
-                        $scope.page.setTitle('Invoice ' + $scope.invoice.OrderNumber);
-                    });
+            function ($scope, $routeParams, $location, $http, customerSrv, invoiceSvc, APISetting) {
+                $scope.invoice = null;
+                invoiceSvc.detail.query({id: $routeParams.id}).$promise.then(function (data) {
+                    $scope.invoice = data;
+                    $scope.page.setTitle('Invoice ' + $scope.invoice.OrderNumber);
+                });
 
-                    $scope.print = function (id) {
-                        var downloadPath = APISetting.apiBase + "invoice/print/" + id;
-                        //window.open(downloadPath, '_self', ''); //not working when server need authentication
-                        
-                        $http.get(downloadPath, {
-                            responseType: 'arraybuffer'
+                $scope.print = function (id) {
+                    var downloadPath = APISetting.apiBase + "invoice/print/" + id;
+                    //window.open(downloadPath, '_self', ''); //not working when server need authentication
+
+                    $http.get(downloadPath, {
+                        responseType: 'arraybuffer'
+                    }).
+                        success(function (data, status, headers, config) {
+                            var contentDisposition = headers('Content-Disposition');
+                            console.log(contentDisposition);
+                            var filenameExp = RegExp("filename=(.*)");
+                            var fileName = filenameExp.exec(contentDisposition)[1];
+                            console.log(fileName);
+                            var file = new Blob([data], {type: 'application/pdf'});
+                            var fileURL = URL.createObjectURL(file);
+                            saveAs(file, fileName);
                         }).
-                            success(function (data, status, headers, config) {
-                                var contentDisposition = headers('Content-Disposition');
-                                console.log(contentDisposition);
-                                var filenameExp = RegExp("filename=(.*)");
-                                var fileName = filenameExp.exec(contentDisposition)[1];
-                                console.log(fileName);
-                                var file = new Blob([data], { type: 'application/pdf' });
-                                var fileURL = URL.createObjectURL(file);
-                                saveAs(file, fileName);
-                            }).
-                            error(function (data, status, headers, config) {
-                                console.log("error when download");
-                                // if there's an error you should see it here
-                            });
+                        error(function (data, status, headers, config) {
+                            console.log("error when download");
+                            // if there's an error you should see it here
+                        });
 
-                    }
+                }
 
-                }])
+            }])
         .controller('InvoicePrintController', ['$scope', '$routeParams', '$location', 'APISetting',
-                function ($scope, $routeParams, $location, APISetting) {
-                    var downloadPath = APISetting + "invoice/print/" + $routeParams.id;
-                    window.open(downloadPath, '_self', '');
-                }])
-    .controller('InvoiceEditController', ['$scope', '$routeParams', '$location',
+            function ($scope, $routeParams, $location, APISetting) {
+                var downloadPath = APISetting + "invoice/print/" + $routeParams.id;
+                window.open(downloadPath, '_self', '');
+            }])
+        .controller('InvoiceEditController', ['$scope', '$routeParams', '$location',
             'customerSrv', 'invoiceSvc',
-               function ($scope, $routeParams, $location, customerSrv, invoiceSvc) {
+            function ($scope, $routeParams, $location, customerSrv, invoiceSvc) {
 
-                   $scope.invoice = null;
-                   invoiceSvc.detail.query({ id: $routeParams.id }).$promise.then(function (data) {
-                       $scope.invoice = data;
-                       $scope.page.setTitle('Edit Invoice ' + $scope.invoice.OrderNumber);
-                   });
+                $scope.invoice = null;
+                invoiceSvc.detail.query({id: $routeParams.id}).$promise.then(function (data) {
+                    $scope.invoice = data;
+                    $scope.page.setTitle('Edit Invoice ' + $scope.invoice.OrderNumber);
+                });
 
-                   //$scope.customerList = customerSrv.list.query();
-                   $scope.edit = function () {
+                //$scope.customerList = customerSrv.list.query();
+                $scope.edit = function () {
+                    console.log("saving edit");
+                    console.log($scope.invoice);
+                    //$scope.invoice.$save(
+                    //    // success
+                    //    function () {
+                    //        $location.path('/invoice/' + $routeParams.id);
+                    //    },
+                    //    // error
+                    //    function (error) {
+                    //        //_showValidationErrors($scope, error);
+                    //    }
+                    //);
+                };
 
-                       $scope.invoice.$save(
-                           // success
-                           function () {
-                               $location.path('/invoice/' + $routeParams.id);
-                           },
-                           // error
-                           function (error) {
-                               //_showValidationErrors($scope, error);
-                           }
-                       );
-                   };
+                $scope.getCustomer = function (val) {
+                    return $http.get('//maps.googleapis.com/maps/api/geocode/json', {
+                        params: {
+                            address: val,
+                            sensor: false
+                        }
+                    }).then(function (response) {
+                        return response.data.results.map(function (item) {
+                            return item.formatted_address;
+                        });
+                    });
+                };
 
-                   $scope.getCustomer = function (val) {
-                       return $http.get('//maps.googleapis.com/maps/api/geocode/json', {
-                           params: {
-                               address: val,
-                               sensor: false
-                           }
-                       }).then(function (response) {
-                           return response.data.results.map(function (item) {
-                               return item.formatted_address;
-                           });
-                       });
-                   };
-
-               }]);
+            }]);
 })();
 
 
