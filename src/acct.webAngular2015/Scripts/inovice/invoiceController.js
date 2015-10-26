@@ -134,16 +134,16 @@
                 $scope.edit = function () {
                     console.log("saving edit");
                     console.log($scope.invoice);
-                    //$scope.invoice.$save(
-                    //    // success
-                    //    function () {
-                    //        $location.path('/invoice/' + $routeParams.id);
-                    //    },
-                    //    // error
-                    //    function (error) {
-                    //        //_showValidationErrors($scope, error);
-                    //    }
-                    //);
+                    $scope.invoice.$save(
+                        // success
+                        function () {
+                            $location.path('/invoice/' + $routeParams.id);
+                        },
+                        // error
+                        function (error) {
+                            //_showValidationErrors($scope, error);
+                        }
+                    );
                 };
 
                 $scope.getCustomer = function (val) {
