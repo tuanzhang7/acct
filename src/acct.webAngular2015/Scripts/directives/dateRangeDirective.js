@@ -1,6 +1,5 @@
 ﻿angular.module('acctApp')
 .directive('dateRange', function () {
-    console.log("in directive dateRange");
     return {
         //restrict: 'E',
         scope: {

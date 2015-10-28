@@ -9,6 +9,7 @@
         //'ngMockE2E',
         //'ui.router',
         'ui.bootstrap',
+        'commonServices',
         'customerServices',
         'invoiceServices',
         'GSTServices',

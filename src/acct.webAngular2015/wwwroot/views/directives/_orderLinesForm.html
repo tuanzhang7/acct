@@ -25,10 +25,10 @@
         <td><div class="editor-numeric-short calc"><input class="form-control" type="text"  data-id="{{line.Id}}" ng-model="line.Qty" /></div></td>
         <td><div class="editor-numeric calc"><input class="form-control" type="text" data-id="{{line.Id}}" ng-model="line.UnitPrice" /></div></td>
         <td><div class="editor-numeric-short calc"><input class="form-control" type="text" data-id="{{line.Id}}" ng-model=" line.Discount" /></div></td>
-        <td class="text-right"><div class="editor-numeric"><span name="OrderDetails[{{line.Id}}].Amount" data-id="line.Id">{{line.Qty * line.UnitPrice}}</span></div></td>
+        <td class="text-right"><div class="editor-numeric"><span name="OrderDetails[{{line.Id}}].Amount" data-id="line.Id">{{calcTotal(line.Qty,line.UnitPrice,line.Discount)}}</span></div></td>
 
         <td>
-            <a href='#' id='@item.Id' data-url="OrderDetails" title="Delete" hreflang="delete_href"><i class="glyphicon glyphicon-trash"></i></a>
+            <a href='#' title="Delete" ng-click="removeRow($index)"><i class="glyphicon glyphicon-trash"></i></a>
         </td>
     </tr>
     
@@ -43,4 +43,7 @@
         </tr>
     </tfoot>-->
 </table>
+<div class="text-right">
+    <h4>Total: {{getTotal() | currency}}</h4>
+</div>
 <a href="#" title="Add more" id="add" ng-click="addRow()"> <i class="glyphicon glyphicon-plus"></i>  </a>

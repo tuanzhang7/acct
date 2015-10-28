@@ -30,7 +30,7 @@
             return '/views/directives/_orderList.html';
         }
     };
-}).directive('orderLinesForm', function () {
+}).directive('orderLinesForm',['commonSrv', function (commonSrv) {
     var link = function (scope, element, attrs) {
         scope.addRow = function () {
             scope.lines.push(
@@ -39,7 +39,25 @@
                 UnitPrice: 0,
                 Discount: 0
             });
-        }
+        };
+
+        scope.removeRow = function(idx){
+
+            scope.lines.splice( idx, 1 );
+        };
+
+        scope.calcTotal=commonSrv.calcTotal;
+
+        scope.getTotal = function(){
+            var total = 0;
+            if(scope.lines){
+                for(var i = 0; i < scope.lines.length; i++){
+                    var line = scope.lines[i];
+                    total += commonSrv.calcTotal(line.Qty,line.UnitPrice,line.Discount);
+                }
+            }
+            return total;
+        };
     };
 
     return {
@@ -52,7 +70,7 @@
         },
         link: link
     };
-}).directive('orderForm', function () {
+}]).directive('orderForm', function () {
     return {
         //restrict: 'E',
         scope: {
