@@ -62,10 +62,10 @@
         <div class="detailview">
             <div class="row">
                 <div class="editor-label">
-                    <label for="repeatSelect"> GST </label>
+                    <label for="GST"> GST </label>
                 </div>
                 <div class="display-field">
-                    <select class="form-control" ng-options="option.Id as option.Code for option in GSTList"
+                    <select class="form-control" id="GST" ng-options="option.Id as option.Code for option in GSTList"
                             ng-model="customer.idmas_GST">
                     </select>
                 </div>

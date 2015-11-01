@@ -132,6 +132,10 @@
                 templateUrl: '/views/invoice/list.html',
                 controller: 'InvoiceController'
             })
+            .when('/invoice/create', {
+                templateUrl: '/views/invoice/create.html',
+                controller: 'InvoiceCreateController'
+            })
             .when('/invoice/:id', {
                 templateUrl: '/views/invoice/detail.html',
                 controller: 'InvoiceDetailController'

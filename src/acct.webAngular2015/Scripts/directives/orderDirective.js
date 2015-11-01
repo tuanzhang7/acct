@@ -32,6 +32,7 @@
     };
 }).directive('orderLinesForm',['commonSrv', function (commonSrv) {
     var link = function (scope, element, attrs) {
+
         scope.addRow = function () {
             scope.lines.push(
             {
@@ -74,7 +75,8 @@
     return {
         //restrict: 'E',
         scope: {
-            order: '=order',
+            order: '=',
+            customers:'=',
         },
         templateUrl: function (elem, attr) {
             return '/views/directives/_orderForm.html';

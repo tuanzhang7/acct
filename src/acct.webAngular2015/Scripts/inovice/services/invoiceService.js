@@ -16,6 +16,9 @@
             listByCustomer: $resource(baseUrl + 'invoice/customer/:id', {}, {
                 query: { method: 'GET', params: { id: '@id' }, isArray: true, headers: {  } }
             }),
+            getNextInvoiceNumber: $resource(baseUrl + 'invoice/getNextInvoiceNumber', {}, {
+                query: { method: 'GET',  headers: {  } }
+            }),
             detail: $resource(baseUrl + 'invoice/:id', {}, {
                 create: { method: 'POST' },
                 query: { method: 'GET', params: { id: '@id' } },

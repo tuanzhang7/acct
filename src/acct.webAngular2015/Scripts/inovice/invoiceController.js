@@ -131,7 +131,7 @@
                 });
 
                 //$scope.customerList = customerSrv.list.query();
-                $scope.edit = function () {
+                $scope.save = function () {
                     console.log("saving edit");
                     console.log($scope.invoice);
                     $scope.invoice.$save(
@@ -159,6 +159,44 @@
                     });
                 };
 
+            }])
+        .controller('InvoiceCreateController', ['$scope', '$routeParams', '$location',
+            'customerSrv', 'invoiceSvc',
+            function ($scope, $routeParams, $location, customerSrv, invoiceSvc) {
+                $scope.page.setTitle('Create Invoice ');
+
+                var _orderDetail= [{
+                    Qty: 0,
+                    UnitPrice: 0,
+                    Discount: 0
+                }];
+
+                $scope.invoice={
+                    OrderDate:new Date(),
+                    OrderDetail:_orderDetail
+                };
+                invoiceSvc.getNextInvoiceNumber.query().$promise.then(function (data) {
+                    $scope.invoice.OrderNumber = data.nextNumber;
+                });
+
+                $scope.customerList = null;
+                customerSrv.list.query({ page:1,pagesize:100 }).$promise.then(function (data) {
+                    $scope.customerList = data;
+                    $scope.customer = {customerId: data[0].Id};
+                });
+
+
+
+                $scope.save = function () {
+                    console.log("saving create invoice");
+                    console.log($scope.invoice);
+
+                    invoiceSvc.detail.create($scope.invoice).$promise.then(function (data) {
+                        console.log(data.Id);
+                        var newId = data.Id;
+                        $location.path('/invoice/' + newId);
+                    });
+                };
             }]);
 })();
 

@@ -4,7 +4,7 @@
             Order Number
         </div>
         <div class="editor-field col-md-4">
-            <input type="text" class="form-control" ng-model="order.OrderNumber" />
+            <input type="text" class="form-control" ng-model="order.OrderNumber" ng-required="true"/>
            
             <!--@Html.HiddenFor(model => model.OrderType)-->
         </div>
@@ -22,21 +22,21 @@
         <div class="editor-label col-md-2">
             Customer
         </div>
-        <!--<div class="editor-field col-md-4">
+        <div class="editor-field col-md-4">
             <div class="input-group">
-                <select class="form-control" ng-options="option.Id as option.Name for option in customerList"
-                        ng-model="order.CustomerId"></select>
+                <select class="form-control" ng-options="option.Id as option.Name for option in customers"
+                        ng-model="order.CustomerId" ng-required="true"></select>
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button">+</button>
                 </span>
 
             </div>
-        </div>-->
-        <div class="editor-field col-md-4">
-            
-                <input type="text" class="form-control" ng-model="order.Customer.Name" />
-                <!--<a ng-href='/customer/{{order.CustomerId}}' ng-bind="order.Customer.Name"></a>-->
         </div>
+        <!--<div class="editor-field col-md-4">-->
+            <!-- -->
+                <!--<input type="text" class="form-control" ng-model="order.Customer.Name" />-->
+                <!--&lt;!&ndash;<a ng-href='/customer/{{order.CustomerId}}' ng-bind="order.Customer.Name"></a>&ndash;&gt;-->
+        <!--</div>-->
         <div class="col-md-1">
         </div>
         <div class="editor-label col-md-2">
@@ -44,7 +44,7 @@
         </div>
         <div class="editor-field col-md-3">
             <div class="input-group">
-                <input type="text" class="form-control" ng-model="order.GSTRate" />
+                <input type="text" class="form-control" ng-model="order.GSTRate" ng-required="true" />
                 <span class="input-group-addon">%</span>
             </div><!-- /input-group -->
         </div>
