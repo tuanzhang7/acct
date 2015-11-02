@@ -130,6 +130,11 @@
                     $scope.page.setTitle('Edit Invoice ' + $scope.invoice.OrderNumber);
                 });
 
+                $scope.customerList = null;
+                customerSrv.list.query({ page:1,pagesize:100 }).$promise.then(function (data) {
+                    $scope.customerList = data;
+                });
+
                 //$scope.customerList = customerSrv.list.query();
                 $scope.save = function () {
                     console.log("saving edit");
@@ -184,8 +189,6 @@
                     $scope.customerList = data;
                     $scope.customer = {customerId: data[0].Id};
                 });
-
-
 
                 $scope.save = function () {
                     console.log("saving create invoice");
