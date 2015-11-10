@@ -22,9 +22,9 @@
             useMocks: false,
             fakeDelay: 100,
             protocol: window.location.protocol.split(':')[0],
-            host: 'localhost',//window.location.hostname,
-            port: 63267,//3000,//String(window.location.port || 80),
-            path: '/api',
+            host: 'localhost',//'acctapi.azurewebsites.net',//'acctapi.thickpotential.com.sg'//'localhost'
+            port: 63267,//63267,//String(window.location.port || 80),
+            path: '/api',//'/api'
         }
     })
         .constant('Enum', {
@@ -39,8 +39,13 @@
         })
 
     .factory('APISetting', function (Config) {
-        var apiBase = Config.API.protocol + '://' + Config.API.host + ':' + Config.API.port + Config.API.path + '/';
-        var urlBase = Config.API.protocol + '://' + Config.API.host + ':' + Config.API.port + '/';
+        var port=':' + Config.API.port;
+        if(Config.API.port==80)
+        {
+            port='';
+        }
+        var apiBase = Config.API.protocol + '://' + Config.API.host + port + Config.API.path + '/';
+        var urlBase = Config.API.protocol + '://' + Config.API.host + port + '/';
         return (
             {
                 apiBase: apiBase,
@@ -155,6 +160,10 @@
             .when('/GST/edit/:id', {
                 templateUrl: '/views/gst/edit.html',
                 controller: 'GSTEditController'
+            })
+            .when('/tools/importData', {
+                templateUrl: '/views/tools/importData.html',
+                controller: 'toolsImportDataController'
             })
             .otherwise({
                 redirectTo: '/'
