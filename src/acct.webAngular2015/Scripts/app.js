@@ -22,8 +22,8 @@
             useMocks: false,
             fakeDelay: 100,
             protocol: window.location.protocol.split(':')[0],
-            host: 'localhost',//'acctapi.azurewebsites.net',//'acctapi.thickpotential.com.sg'//'localhost'
-            port: 63267,//63267,//String(window.location.port || 80),
+            host: 'acctapi.thickpotential.com.sg',//'acctapi.azurewebsites.net',//'acctapi.thickpotential.com.sg'//'localhost'
+            port: 80,//63267,//String(window.location.port || 80),
             path: '/api',//'/api'
         }
     })

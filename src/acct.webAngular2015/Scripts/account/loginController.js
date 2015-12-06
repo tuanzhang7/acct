@@ -11,6 +11,7 @@
             };
 
             $scope.message = "";
+            $scope.page.setTitle("Login");
 
             $scope.login = function () {
 
