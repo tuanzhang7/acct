@@ -1,0 +1,126 @@
+﻿<div class="navbar navbar-inner block-header">
+    <div class="pull-left">
+        <form class="form-inline">
+            <div class="form-group">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                        
+                        <span>
+                            {{dateRangeEnum[dateRangeParm]}}
+                        </span>
+                        
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                        <li role="presentation" ng-repeat="(key, value) in dateRangeEnum" ng-cloak>
+                            <a role="menuitem" tabindex="-1"
+                               href='/quotation?dateRange={{key}}&status={{statusParm}}'>
+                                {{value}}
+                                <span ng-if="key == dateRangeParm">
+                                    <i class="fa fa-check"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <!--<div date-ranage orders="transactions"></div>-->
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                        <span>
+                            {{statusParm}}
+                        </span>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                        <!--<li role="presentation" ng-repeat="(key, value) in statusEnum" ng-cloak>
+                            <a role="menuitem" tabindex="-1"
+                               href='/quotation?dateRange={{dateRangeParm}}&status={{key}}'>
+                                {{key}}
+                                <span ng-if="key == statusParm">
+                                    <i class="fa fa-check"></i>
+                                </span>
+                            </a>
+                        </li>-->
+                        <li role="presentation" ng-repeat-start="(key, value) in statusEnum" ng-cloak>
+                            <a role="menuitem" tabindex="-1"
+                               href='/quotation?dateRange={{dateRangeParm}}&status={{key}}'>
+                                {{key}}
+                                <span ng-if="key == statusParm">
+                                    <i class="fa fa-check"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li role="separator" class="divider" ng-repeat-end ng-if='key=="Open"'>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="pull-right">
+        <a class="btn btn-primary" ng-href='/quotation/create' role="button"><i class="fa fa-plus"></i> New</a>
+    </div>
+</div>
+
+<table class="table table-hover margin-top15">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                Date
+            </th>
+            <th ng-if="skipCustomer!=true">
+                Customer
+            </th>
+            <th>
+                Remark
+            </th>
+            <th class="text-right">
+                Total Amount
+            </th>
+            
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tr ng-repeat="item in quotations">
+        <td>
+            <a ng-href='/quotation/{{item.Id}}' ng-bind="item.OrderNumber"></a>
+        </td>
+        <td>
+            {{item.OrderDate |date:'dd/MM/yyyy'}}
+        </td>
+        <td ng-if="skipCustomer!=true">
+            {{item.Customer.Name}}
+        </td>
+        <td>
+            {{item.Remark}}
+        </td>
+        <td class="text-right">
+            {{item.TotalWithTax | currency}}
+        </td>
+        <td>
+            <div order-status status="item.Status"></div>
+        </td>
+        <td>
+            <a ng-href='/quotation/edit/{{item.Id}}' title="Edit" ng-show='item.Status!=3'><i class="glyphicon glyphicon-pencil"></i></a>
+            <div class="pull-right">
+                <a ng-href='/quotation/print/{{item.Id}}' title="Print"><i class="fa fa-print"></i></a>
+                <!--<a title="Print" ng-click="print(item.Id)"><i class="fa fa-print"></i> Print</a>-->
+            </div>
+        </td>
+    </tr>
+</table>
+
+<!--<div order-list orders="quotations" skipCustomer="false"></div>-->
+
+<pagination total-items="totalItems"
+            ng-model="currentPage"
+            max-size="maxSize" class="pagination-md" boundary-links="true"
+            rotate="false" num-pages="numPages" items-per-page="pageSize" ng-change="pageChanged()"></pagination>
+
+<pre>Page: {{currentPage}} / {{numPages}} Total:{{totalItems}}</pre>

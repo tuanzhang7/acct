@@ -12,6 +12,7 @@
         'commonServices',
         'customerServices',
         'invoiceServices',
+        'quotationServices',
         'GSTServices',
         'authServices',
         'authInterceptorServices'
@@ -78,7 +79,7 @@
             }
         }
         $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
-            $rootScope.page.setTitle(current.$$route.title);
+            //$rootScope.page.setTitle(current.$$route.title);
         });
         $rootScope.$on('$routeChangeStart', function (event, next, current) {
             //console.log('$routeChangeStart:......');
@@ -148,6 +149,22 @@
             .when('/invoice/edit/:id', {
                 templateUrl: '/views/invoice/edit.html',
                 controller: 'InvoiceEditController'
+            })
+            .when('/quotation', {
+                templateUrl: '/views/quotation/list.html',
+                controller: 'QuotationController'
+            })
+            .when('/quotation/create', {
+                templateUrl: '/views/quotation/create.html',
+                controller: 'QuotationCreateController'
+            })
+            .when('/quotation/:id', {
+                templateUrl: '/views/quotation/detail.html',
+                controller: 'QuotationDetailController'
+            })
+            .when('/quotation/edit/:id', {
+                templateUrl: '/views/quotation/edit.html',
+                controller: 'QuotationEditController'
             })
             .when('/GST', {
                 templateUrl: '/views/gst/list.html',
