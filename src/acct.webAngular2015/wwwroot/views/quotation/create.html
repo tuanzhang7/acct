@@ -1,9 +1,9 @@
 ﻿<div id="bodyContainer">
     <form ng-submit="save()">
-        {{invoice.Remark}}
-        <div order-form order="invoice" customers="customerList"></div>
+        {{quotation.Remark}}
+        <div order-form order="quotation" customers="customerList"></div>
 
-        <div order-lines-form lines="invoice.OrderDetail"></div>
+        <div order-lines-form lines="quotation.OrderDetail"></div>
         <p>
             <input type="submit" value="Save"/>
         </p>

@@ -4,17 +4,17 @@
             <div class="form-group">
                 <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                        
+
                         <span>
                             {{dateRangeEnum[dateRangeParm]}}
                         </span>
-                        
+
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                         <li role="presentation" ng-repeat="(key, value) in dateRangeEnum" ng-cloak>
                             <a role="menuitem" tabindex="-1"
-                               href='/quotation?dateRange={{key}}&status={{statusParm}}'>
+                               href='/quotation?dateRange={{key}}'>
                                 {{value}}
                                 <span ng-if="key == dateRangeParm">
                                     <i class="fa fa-check"></i>
@@ -23,38 +23,6 @@
                         </li>
                     </ul>
                     <!--<div date-ranage orders="transactions"></div>-->
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                        <span>
-                            {{statusParm}}
-                        </span>
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                        <!--<li role="presentation" ng-repeat="(key, value) in statusEnum" ng-cloak>
-                            <a role="menuitem" tabindex="-1"
-                               href='/quotation?dateRange={{dateRangeParm}}&status={{key}}'>
-                                {{key}}
-                                <span ng-if="key == statusParm">
-                                    <i class="fa fa-check"></i>
-                                </span>
-                            </a>
-                        </li>-->
-                        <li role="presentation" ng-repeat-start="(key, value) in statusEnum" ng-cloak>
-                            <a role="menuitem" tabindex="-1"
-                               href='/quotation?dateRange={{dateRangeParm}}&status={{key}}'>
-                                {{key}}
-                                <span ng-if="key == statusParm">
-                                    <i class="fa fa-check"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li role="separator" class="divider" ng-repeat-end ng-if='key=="Open"'>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </form>
@@ -82,7 +50,7 @@
             <th class="text-right">
                 Total Amount
             </th>
-            
+
             <th></th>
             <th></th>
         </tr>

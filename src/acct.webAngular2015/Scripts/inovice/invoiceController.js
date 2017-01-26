@@ -178,6 +178,7 @@
 
                 $scope.invoice={
                     OrderDate:new Date(),
+                    GSTRate:0,
                     OrderDetail:_orderDetail
                 };
                 invoiceSvc.getNextInvoiceNumber.query().$promise.then(function (data) {
@@ -202,7 +203,3 @@
                 };
             }]);
 })();
-
-
-
-

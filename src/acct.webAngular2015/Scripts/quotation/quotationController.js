@@ -4,7 +4,6 @@
     angular.module('acctApp')
         .controller('QuotationController', ['$scope', '$http', '$location', 'customerSrv', 'quotationSvc', 'settings',
             function ($scope, $http, $location, customerSrv, quotationSvc, settings) {
-                console.log("in QuotationController");
                 var pageSize = settings.pageSize;
                 $scope.pageSize = pageSize;
                 $scope.currentPage = 1;
@@ -20,31 +19,13 @@
                     Last7Days: "Past 7 Days",
                     Last365Days: "Past 365 Days",
                 };
-                $scope.statusEnum = {
-                    All: 0,
-                    Open: 0,
-                    Unpaid: 1,
-                    Partial: 2,
-                    Overdue: 4,
-                    Paid: 3
-                }
-                $scope.statusParm = $location.search().status != null ? $location.search().status : "All";
-
-                var _statusParms = $scope.statusParm;
-                if ($location.search().status == "All") {
-                    _statusParms = ['Unpaid', 'Partial', 'Overdue', 'Paid'];
-                }
-                else if ($location.search().status == "Open") {
-                    _statusParms = ['Unpaid', 'Partial', 'Overdue'];
-                }
 
                 $scope.dateRangeParm = $location.search().dateRange != null ? $location.search().dateRange : "AnyTime";
 
-                get($scope.dateRangeParm, _statusParms, $scope.currentPage, pageSize);
+                get($scope.dateRangeParm,  $scope.currentPage, pageSize);
                 function get(dateRange, status, currentPage, pageSize) {
                     quotationSvc.list.query({
                         dateRange: dateRange,
-                        status: status,
                         page: currentPage,
                         pagesize: pageSize
                     }, function (data, headers) {
@@ -59,7 +40,7 @@
                 }
 
                 $scope.pageChanged = function () {
-                    get($scope.dateRangeParm, _statusParms, $scope.currentPage, pageSize);
+                    get($scope.dateRangeParm,  $scope.currentPage, pageSize);
                 };
 
                 $scope.lookup = function (q) {
@@ -178,6 +159,7 @@
 
                 $scope.quotation={
                     OrderDate:new Date(),
+                    GSTRate:0,
                     OrderDetail:_orderDetail
                 };
                 quotationSvc.getNextQuotationNumber.query().$promise.then(function (data) {
@@ -202,7 +184,3 @@
                 };
             }]);
 })();
-
-
-
-
