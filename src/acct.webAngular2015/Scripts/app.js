@@ -94,12 +94,12 @@
                 }
             }
         });
-        
+
     }])
 
     ;
 
-    
+
     function configRoute($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {
@@ -330,6 +330,6 @@
     //        return [200, dashBoard, {}, "OK"];
     //    });
     //})
-    
+
 
 })();

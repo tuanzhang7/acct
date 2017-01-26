@@ -23,7 +23,7 @@
                 $scope.dateRangeParm = $location.search().dateRange != null ? $location.search().dateRange : "AnyTime";
 
                 get($scope.dateRangeParm,  $scope.currentPage, pageSize);
-                function get(dateRange, status, currentPage, pageSize) {
+                function get(dateRange, currentPage, pageSize) {
                     quotationSvc.list.query({
                         dateRange: dateRange,
                         page: currentPage,
